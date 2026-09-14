@@ -1,0 +1,67 @@
+@layer components {
+  .section {
+    @apply px-3xl;
+
+    .section__content {
+      @apply max-w-360 mx-auto text-on-primary;
+
+      h1 {
+        @apply text-heading-h2 font-black mb-2xl;
+      }
+
+      p {
+        @apply text-body-lg my-md;
+
+        a {
+          @apply text-secondary hover:underline;
+        }
+      }
+
+      *:first-child {
+        @apply mt-0!;
+      }
+    }
+  }
+
+  .section-transparent {
+    > .section__content {
+    }
+  }
+
+  .section-headless {
+  }
+
+  .section-dark-rectangle {
+    > .section__content {
+      @apply bg-inverse-surface-strong border border-outline-on-inverse rounded-md p-4xl;
+    }
+  }
+
+  .section-light-rectangle {
+    > .section__content {
+      @apply bg-surface border-l-8 border-primary rounded-md
+                px-4xl py-5xl
+                text-on-surface;
+
+      p {
+        a {
+          @apply text-primary underline;
+        }
+      }
+
+      pre {
+        @apply bg-inverse-surface-strong rounded-md p-4xl overflow-hidden text-on-primary;
+      }
+    }
+  }
+
+  .section-blue-gradient {
+    @apply bg-linear-to-b from-inverse-surface-strong to-blue-800
+      to-50%
+      border-b border-b-outline-on-inverse;
+
+    > .section__content {
+      @apply py-3xl;
+    }
+  }
+}

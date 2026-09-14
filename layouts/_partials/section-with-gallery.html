@@ -1,0 +1,22 @@
+<div class="">
+  <div class="">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </div>
+  <div class="mt-4xl flex flex-wrap gap-2xl justify-center">
+    {{- range .Resources.ByType "image" }}
+      {{- $thumb := .Process "fit 400x280 webp lossy q80" -}}
+      <div
+        class="aspect-3/2 w-full sm:w-64 rounded-md overflow-hidden border border-outline-on-inverse hover:scale-103 transition-all"
+      >
+        <a href="{{ .RelPermalink }}">
+          <img
+            src="{{ $thumb.RelPermalink }}"
+            alt="{{ .Name }}"
+            class="w-full h-full object-cover"
+          />
+        </a>
+      </div>
+    {{- end }}
+  </div>
+</div>

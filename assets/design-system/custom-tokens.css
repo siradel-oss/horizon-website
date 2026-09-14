@@ -1,0 +1,70 @@
+/* ============================================================
+   OSS Design System — Custom tokens (manuel)
+   ------------------------------------------------------------
+   Tokens qui NE VIENNENT PAS de Tokens Studio / Figma.
+   Maintenus manuellement ici parce que :
+     - Gradients : pas un cas typique DTCG/Figma Variables
+     - Shadows avec color-mix() : idem
+     - Primitives custom (violet, grey-350) : ajoutées hors Tokens Studio
+     - Alias custom (button-text-on-dark-bg) : alias local
+
+   ⚠️  Ce fichier n'est PAS régénéré par scripts/sync-tokens.js.
+   Importé après les fichiers générés dans index.css.
+   ============================================================ */
+
+@theme {
+  /* ============================================================
+     CUSTOM PRIMITIVES — Violet (utilisé par border-gradient-blue)
+     ============================================================ */
+  --color-violet-900: #00129d;
+  --color-violet-700: #322c98;
+  --color-violet-500: #6340ff;
+  --color-violet-400: #6557ff;
+
+  /* ============================================================
+     CUSTOM PRIMITIVES — Grey 350 (utilisé par border-gradient-dark)
+     ============================================================ */
+  --color-grey-350: #acacac;
+
+  /* ============================================================
+     GRADIENTS — border-gradient
+     Bordures décoratives des cards (article-header, footer, blog-card,
+     feature-card, usecase-card, highlight-bloc, demo-card).
+     ============================================================ */
+  --color-border-gradient-dark: linear-gradient(
+    255deg,
+    var(--color-grey-700) 53.29%,
+    var(--color-grey-350) 68.09%,
+    var(--color-grey-950) 88.01%,
+    var(--color-grey-600-2) 105.37%
+  );
+  --color-border-gradient-blue: linear-gradient(
+    90deg,
+    var(--color-violet-900) 0%,
+    var(--color-violet-700) 25%,
+    var(--color-violet-500) 50%,
+    var(--color-violet-700) 75%,
+    var(--color-violet-900) 100%
+  );
+
+  /* ============================================================
+     SHADOWS — card glow (electric blue avec alpha via color-mix)
+     Utilisés sur demo-card et feature-card pour l'effet "hover lifted".
+     ============================================================ */
+  --color-shadow-card-glow-ring: color-mix(
+    in srgb,
+    var(--color-electric-blue-700) 50%,
+    transparent
+  );
+  --color-shadow-card-glow-halo: color-mix(
+    in srgb,
+    var(--color-electric-blue-700) 25%,
+    transparent
+  );
+
+  /* ============================================================
+     BUTTON — alias custom
+     Utilisé dans button.css pour les états hover de primary/dark.
+     ============================================================ */
+  --color-button-text-on-dark-bg: var(--color-on-surface);
+}

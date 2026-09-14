@@ -1,0 +1,79 @@
+@layer components {
+  .header {
+    &:has(#header__burger[aria-expanded="true"]) {
+      @apply fixed;
+    }
+
+    .header__skip-link {
+      @apply sr-only
+        focus:not-sr-only focus:absolute focus:left-md focus:top-md focus:z-50
+        focus:px-md focus:py-xs focus:rounded-xs focus:bg-secondary
+        focus:text-on-surface focus:font-bold;
+    }
+
+    .header__main-nav {
+      a {
+        @apply relative transition-colors duration-200 hover:text-secondary py-sm px-lg rounded-xs
+          hover:after:scale-x-100 focus-visible:after:scale-x-100;
+
+        &::after {
+          @apply absolute bottom-sm inset-x-lg h-0.5 origin-left scale-x-0 bg-secondary transition-transform duration-200 content-[""];
+        }
+
+        &[aria-current="page"] {
+          @apply bg-secondary text-on-surface after:hidden hover:text-on-surface;
+        }
+      }
+    }
+
+    #header__burger {
+      @apply lg:hidden inline-flex items-center justify-center p-xs text-on-primary min-w-11 min-h-11 cursor-pointer;
+
+      & > span {
+        @apply flex flex-col justify-between w-5.5 h-4;
+      }
+
+      & > span > span {
+        @apply block h-[1.5px] w-full bg-current rounded-full origin-center transition-[transform,opacity] duration-300 ease-[ease];
+      }
+
+      &[aria-expanded="true"] > span > span:first-child {
+        @apply translate-y-[7.25px] rotate-45;
+      }
+
+      &[aria-expanded="true"] > span > span:nth-child(2) {
+        @apply opacity-0 scale-x-0;
+      }
+
+      &[aria-expanded="true"] > span > span:last-child {
+        @apply -translate-y-[7.25px] -rotate-45;
+      }
+    }
+
+    #header__mobile-menu {
+      &[aria-expanded="true"],
+      &:not([inert]) {
+        @apply opacity-100 scale-100 pointer-events-auto;
+      }
+
+      a {
+        @apply cursor-pointer text-heading-h2-mobile sm:text-heading-h2-tablet transition-colors duration-200
+          hover:text-secondary focus-visible:text-secondary;
+      }
+    }
+
+    /* ---------- Focus-visible (all interactive descendants) ---------- */
+    a:focus-visible,
+    button:focus-visible {
+      @apply outline-2 outline-offset-4 outline-secondary rounded-xs;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header *,
+    .header *::before,
+    .header *::after {
+      @apply duration-[0.01ms]! [animation-duration:0.01ms]!;
+    }
+  }
+}

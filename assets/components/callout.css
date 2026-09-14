@@ -1,0 +1,63 @@
+@layer components {
+  .callout,
+  blockquote {
+    @apply flex flex-col gap-md p-3xl border-l-7 bg-surface-overlay border-primary-outline-muted rounded-xs;
+
+    > * {
+      @apply my-0!;
+    }
+
+    h4 {
+      @apply text-on-primary font-bold text-body-lg tracking-tight;
+    }
+
+    p {
+      @apply text-on-primary text-body-md;
+    }
+
+    &.callout--note {
+      @apply px-xl py-xl border-l-4 bg-primary-container border-outline-info;
+
+      *,
+      a:hover {
+        @apply text-on-surface;
+      }
+    }
+
+    &.callout--important {
+      @apply px-xl py-xl border-l-4 bg-secondary-container border-secondary;
+
+      *,
+      a:hover {
+        @apply text-on-surface;
+      }
+    }
+
+    &.callout--warning {
+      @apply px-xl py-xl border-l-4 bg-warning-bright border-warning;
+
+      *,
+      a:hover {
+        @apply text-on-surface;
+      }
+    }
+
+    &.callout--failure {
+      @apply px-xl py-xl border-l-4 bg-error-container border-outline-error;
+
+      *,
+      a:hover {
+        @apply text-on-surface;
+      }
+    }
+
+    &.callout--success {
+      @apply px-xl py-xl border-l-4 bg-success-bright border-success;
+
+      *,
+      a:hover {
+        @apply text-on-surface;
+      }
+    }
+  }
+}

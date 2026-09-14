@@ -1,0 +1,195 @@
+/* ============================================================
+   OSS Design System — Primitives
+   ------------------------------------------------------------
+   Low-level design primitives (raw values).
+   ⚠️  Ne jamais utiliser directement dans le code app.
+   Toujours passer par les tokens sémantiques :
+     - couleurs   → colors.css      (text/bg/border/button/icon)
+     - typo       → typography.css  (font-sans, font-weight-*, text-*)
+     - dimensions → tokens.css      (spacing, radius, border-width, icon-size)
+   ============================================================ */
+
+@theme {
+  /* ============================================================
+     ⚠️  GÉNÉRÉ par design-system/scripts/sync-tokens.js — ne pas éditer manuellement.
+     Source : Tokens Studio DTCG (primitives/value + theme/light)
+     2026-07-24T09:20:58.180Z
+     ============================================================ */
+
+  /* ============================================================
+     PRIMITIVES — Colors
+     Échelles brutes. Source unique pour les tokens sémantiques de colors.css.
+     ============================================================ */
+
+  /* --- blue --- */
+  --color-blue-50: #f0f0fc;
+  --color-blue-100: #ddddf5;
+  --color-blue-200: #c8c8ea;
+  --color-blue-300: #ababdf;
+  --color-blue-400: #8080d3;
+  --color-blue-500: #5554c7;
+  --color-blue-600: #2928b5;
+  --color-blue-700: #1c1b9f;
+  --color-blue-800: #0100b8;
+  --color-blue-900: #091026;
+  --color-blue-1000: #010106;
+  --color-blue-rgb: #1c2691b3;
+
+  /* --- grey --- */
+  --color-grey-50: #f7f6f9;
+  --color-grey-100: #efeff0;
+  --color-grey-200: #dfdfe1;
+  --color-grey-300: #bdbdbf;
+  --color-grey-400: #99999d;
+  --color-grey-500: #7a7a7a;
+  --color-grey-600: #636366;
+  --color-grey-700: #4a4a4c;
+  --color-grey-800: #353536;
+  --color-grey-900: #202020;
+  --color-grey-950: #1b1b1b;
+  --color-grey-1000: #232323;
+  --color-grey-500-rgb: #2e2e2e70;
+  --color-grey-600-2: #737373;
+
+  /* --- white --- */
+  --color-white: #ffffff;
+  --color-white-alpha: #fffffe2e;
+
+  /* --- green --- */
+  --color-green-100: #eaf7ef;
+  --color-green-200: #d6efde;
+  --color-green-300: #acdfbd;
+  --color-green-400: #83d09d;
+  --color-green-500: #59c07c;
+  --color-green-600: #30b05b;
+  --color-green-700: #1b8b41;
+  --color-green-800: #024b1b;
+
+  /* --- red --- */
+  --color-red-50: #fff3f0;
+  --color-red-100: #ffc2b7;
+  --color-red-200: #ff8c79;
+  --color-red-300: #ff4333;
+  --color-red-400: #e01b00;
+  --color-red-500: #ad1300;
+  --color-red-600: #870000;
+  --color-red-700: #570000;
+  --color-red-800: #2a0100;
+  --color-red-900: #070000;
+
+  /* --- yellow --- */
+  --color-yellow-50: #fef9ea;
+  --color-yellow-100: #fdf2d5;
+  --color-yellow-200: #fce5ab;
+  --color-yellow-300: #f8d982;
+  --color-yellow-400: #f5cc58;
+  --color-yellow-500: #f3bf2e;
+  --color-yellow-600: #c29925;
+  --color-yellow-700: #92731c;
+  --color-yellow-800: #614c12;
+  --color-yellow-900: #312609;
+
+  /* --- duck-blue --- */
+  --color-duck-blue-500: #40c6f2;
+  --color-duck-blue-700: #0281ac;
+  --color-duck-blue-500-alpha: #0281ac1a;
+
+  /* --- electric blue --- */
+  --color-electric-blue-50: #eeefff;
+  --color-electric-blue-100: #cbcfe9;
+  --color-electric-blue-200: #afb7eb;
+  --color-electric-blue-300: #95a1f0;
+  --color-electric-blue-400: #7b8bf3;
+  --color-electric-blue-500: #6175f7;
+  --color-electric-blue-600: #455dfa;
+  --color-electric-blue-700: #2b47fe;
+
+  /* --- blue dark --- */
+  --color-blue-dark-50: #f6f8ff;
+  --color-blue-dark-100: #d3d7e5;
+  --color-blue-dark-200: #b1b7cb;
+  --color-blue-dark-300: #9097b0;
+  --color-blue-dark-400: #727993;
+  --color-blue-dark-500: #565d73;
+  --color-blue-dark-600: #3d4252;
+  --color-blue-dark-700: #252833;
+  --color-blue-dark-800: #101117;
+  --color-blue-dark-900: #010202;
+  --color-blue-dark-alpha: #565d73b3;
+
+  /* --- orange --- */
+  --color-orange-50: #ffead9;
+  --color-orange-100: #ffdecc;
+  --color-orange-200: #ffc6b2;
+  --color-orange-300: #ffad99;
+  --color-orange-400: #ff7a33;
+  --color-orange-500: #ff5c00;
+  --color-orange-600: #cc4a00;
+  --color-orange-700: #993700;
+  --color-orange-800: #662500;
+  --color-orange-900: #331200;
+
+  /* --- blue-light --- */
+  --color-blue-light-50: #f3fdff;
+  --color-blue-light-100: #f0fcff;
+  --color-blue-light-200: #e9fbff;
+  --color-blue-light-300: #e2faff;
+  --color-blue-light-400: #dcf8ff;
+  --color-blue-light-500: #d5f7ff;
+  --color-blue-light-600: #d2ecff;
+
+  /* ============================================================
+     PRIMITIVES — Type scale
+     Échelle (déjà en rem côté Tokens Studio).
+     Source : font-size, line-height, spacing, radius, icon-size.
+     ============================================================ */
+  --type-scale-0: 0rem;
+  --type-scale-1: 0.063rem;
+  --type-scale-2: 0.125rem;
+  --type-scale-4: 0.25rem;
+  --type-scale-6: 0.375rem;
+  --type-scale-8: 0.5rem;
+  --type-scale-12: 0.75rem;
+  --type-scale-13: 0.813rem;
+  --type-scale-14: 0.875rem;
+  --type-scale-16: 1rem;
+  --type-scale-18: 1.125rem;
+  --type-scale-20: 1.25rem;
+  --type-scale-22: 1.375rem;
+  --type-scale-24: 1.5rem;
+  --type-scale-25: 1.563rem;
+  --type-scale-26: 1.625rem;
+  --type-scale-28: 1.75rem;
+  --type-scale-29: 1.813rem;
+  --type-scale-30: 1.875rem;
+  --type-scale-32: 2rem;
+  --type-scale-34: 2.125rem;
+  --type-scale-36: 2.25rem;
+  --type-scale-38: 2.375rem;
+  --type-scale-40: 2.5rem;
+  --type-scale-45: 2.813rem;
+  --type-scale-48: 3rem;
+  --type-scale-56: 3.5rem;
+  --type-scale-57: 3.563rem;
+  --type-scale-64: 4rem;
+  --type-scale-72: 4.5rem;
+  --type-scale-76: 4.75rem;
+  --type-scale-80: 5rem;
+  --type-scale-88: 5.5rem;
+  --type-scale-96: 6rem;
+  --type-scale-104: 6.5rem;
+  --type-scale-110: 6.875rem;
+  --type-scale-118: 7.375rem;
+  --type-scale-126: 7.875rem;
+  --type-scale-134: 8.375rem;
+
+  /* ============================================================
+     PRIMITIVES — Font family + weights
+     ============================================================ */
+  --type-font-family-satoshi: "Satoshi", sans-serif;
+
+  --type-font-weight-bold: 700;
+  --type-font-weight-regular: 400;
+  --type-font-weight-medium: 500;
+  --type-font-weight-black: 900;
+}

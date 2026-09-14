@@ -1,0 +1,92 @@
+{{ define "main" }}
+  <main class="grow px-3xl bg-inverse-surface">
+    <nav
+      aria-label="Fil d'Ariane"
+      class="mt-8xl max-w-360 mx-auto py-xl flex items-center justify-between gap-3xl"
+    >
+      <ol class="flex items-center gap-xs text-body-xs font-bold">
+        <li>
+          <a
+            href="{{ relref . "/news/latest/" }}"
+            class="text-on-primary hover:underline"
+            >{{ T "menu__news" }}</a
+          >
+        </li>
+        <li aria-hidden="true" class="text-on-primary">&rsaquo;</li>
+        <li>
+          <span aria-current="page" class="text-secondary">{{ .Title }}</span>
+        </li>
+      </ol>
+      <a href="{{ relref . "/news/" }}" class="btn btn-outlined btn-sm"
+        >{{ T "all_articles" }}
+        ({{ len (.Site.GetPage "section" "news").Pages }})</a
+      >
+    </nav>
+
+    <article>
+      {{ partial "article-header.html" . }}
+      <div class="doc-typography max-w-240 mx-auto py-7xl">
+        {{ .Content }}
+      </div>
+    </article>
+  </main>
+  <nav
+    aria-label="Navigation entre les articles"
+    class="relative bg-inverse-surface-strong px-3xl
+      before:absolute before:inset-x-0 before:top-0 before:h-px before:pointer-events-none before:content-['']
+      before:bg-(image:--color-border-gradient-dark)
+    "
+  >
+    <div
+      class="max-w-360 mx-auto py-xl flex items-center justify-between gap-3xl"
+    >
+      {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}" class="btn btn-ghost btn-md">
+          <span class="btn-icon">
+            <svg viewBox="0 0 13 12" fill="none" aria-hidden="true">
+              <path
+                d="M12.25 6H1"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.25 0.75L1 6L6.25 11.25"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span>{{ T "previous_article" }}</span>
+        </a>
+      {{ end }}
+      <span class="grow"></span>
+      {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}" class="btn btn-ghost btn-md">
+          <span>{{ T "next_article" }}</span>
+          <span class="btn-icon">
+            <svg viewBox="0 0 13 12" fill="none" aria-hidden="true">
+              <path
+                d="M0.75 6H12"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.75 11.25L12 6L6.75 0.75"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </a>
+      {{ end }}
+    </div>
+  </nav>
+{{ end }}

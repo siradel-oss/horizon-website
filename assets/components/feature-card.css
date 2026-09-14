@@ -1,0 +1,20 @@
+@layer components {
+  .feature-card {
+    &::before {
+      @apply absolute inset-0 p-px pointer-events-none;
+      content: "";
+      border-radius: inherit;
+      background: var(--color-border-gradient-dark);
+      mask:
+        linear-gradient(var(--color-white) 0 0) content-box,
+        linear-gradient(var(--color-white) 0 0);
+      mask-composite: exclude;
+    }
+
+    &:hover {
+      box-shadow:
+        0 0 0 1px var(--color-shadow-card-glow-ring),
+        0 0 28px 8px var(--color-shadow-card-glow-halo);
+    }
+  }
+}

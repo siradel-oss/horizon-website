@@ -1,0 +1,7 @@
+public/
+resources/
+hugo_stats.json
+content/doc/
+static/
+layouts/search_index.json
+layouts/llms_txt.md

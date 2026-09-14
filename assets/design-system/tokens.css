@@ -1,0 +1,85 @@
+/* ============================================================
+   OSS Design System — Tokens (dimensions)
+   ------------------------------------------------------------
+   Tokens sémantiques de dimensions :
+     - spacing       (padding, margin, gap, width, height)
+     - radius        (border-radius)
+     - border-width  (épaisseur des bordures)
+     - icon-size     (taille des icônes)
+   Tous mappés sur `--type-scale-*` défini dans primitives.css.
+
+   Couleurs   → colors.css
+   Typo       → typography.css
+   Primitives → primitives.css
+   ============================================================ */
+
+@theme {
+  /* ============================================================
+     ⚠️  GÉNÉRÉ par design-system/scripts/sync-tokens.js — ne pas éditer manuellement.
+     Source : Tokens Studio DTCG (primitives/value + theme/light)
+     2026-06-29T12:17:00.141Z
+     ============================================================ */
+
+  /* ============================================================
+     SEMANTIC — Spacing
+     Utilisation : class `p-{name}` / `m-{name}` / `gap-{name}` / `w-{name}` / `h-{name}`
+     ============================================================ */
+  --spacing-none: var(--type-scale-0);
+  --spacing-xxs: var(--type-scale-2);
+  --spacing-xs: var(--type-scale-4);
+  --spacing-sm: var(--type-scale-8);
+  --spacing-md: var(--type-scale-12);
+  --spacing-lg: var(--type-scale-16);
+  --spacing-xl: var(--type-scale-20);
+  --spacing-2xl: var(--type-scale-24);
+  --spacing-3xl: var(--type-scale-32);
+  --spacing-4xl: var(--type-scale-40);
+  --spacing-5xl: var(--type-scale-48);
+  --spacing-6xl: var(--type-scale-56);
+  --spacing-7xl: var(--type-scale-64);
+  --spacing-8xl: var(--type-scale-72);
+  --spacing-9xl: var(--type-scale-80);
+  --spacing-10xl: var(--type-scale-88);
+  --spacing-11xl: var(--type-scale-96);
+  --spacing-12xl: var(--type-scale-104);
+  --spacing-13xl: var(--type-scale-110);
+  --spacing-14xl: var(--type-scale-118);
+  --spacing-15xl: var(--type-scale-126);
+  --spacing-16xl: var(--type-scale-134);
+  --spacing-2xs: var(--type-scale-6);
+
+  /* ============================================================
+     SEMANTIC — Border radius
+     Utilisation : class `rounded-{name}`
+     ============================================================ */
+  --radius-pill: var(--type-scale-64);
+  --radius-lg: var(--type-scale-16);
+  --radius-none: var(--type-scale-0);
+  --radius-xxs: var(--type-scale-2);
+  --radius-xs: var(--type-scale-4);
+  --radius-sm: var(--type-scale-8);
+  --radius-md: var(--type-scale-12);
+  --radius-xl: var(--type-scale-24);
+  --radius-2xl: var(--type-scale-32);
+  --radius-3xl: var(--type-scale-48);
+  --radius-4xl: var(--type-scale-64);
+
+  /* ============================================================
+     SEMANTIC — Border width
+     Utilisation : property `border-width` ou class custom (cf. button.css)
+     ============================================================ */
+  --border-width-md: var(--type-scale-2);
+  --border-width-sm: var(--type-scale-1);
+
+  /* ============================================================
+     SEMANTIC — Icon sizes
+     Utilisation : class `icon-size-{name}` (cf. utilities.css)
+     ============================================================ */
+  --icon-size-xs: var(--type-scale-8);
+  --icon-size-s: var(--type-scale-12);
+  --icon-size-m: var(--type-scale-14);
+  --icon-size-l: var(--type-scale-16);
+  --icon-size-xl: var(--type-scale-18);
+  --icon-size-xxl: var(--type-scale-20);
+  --icon-size-3xl: var(--type-scale-22);
+}

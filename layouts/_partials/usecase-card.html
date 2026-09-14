@@ -1,0 +1,19 @@
+<article
+  class="usecase-card relative flex gap-sm items-start py-2xl pl-2xl pr-0 rounded-md"
+>
+  <div class="flex flex-col gap-sm flex-1">
+    <p
+      aria-hidden="true"
+      class="font-black text-primary-hover text-heading-h3 tracking-tight"
+    >
+      {{ .number }}
+    </p>
+    <h3 class="font-bold text-heading-h6">{{ .title }}</h3>
+    <p class="text-body-lg">{{ .text }}</p>
+  </div>
+  <img
+    src="{{ .icon }}"
+    alt=""
+    class="w-28.5 h-28.5 opacity-40 shrink-0 hidden sm:block"
+  />
+</article>

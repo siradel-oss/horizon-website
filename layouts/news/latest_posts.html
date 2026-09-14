@@ -1,0 +1,74 @@
+{{ define "main" }}
+  <main class="grow px-3xl bg-inverse-surface">
+    <section
+      aria-labelledby="blog-heading"
+      class="relative max-w-360 mx-auto pt-6xl pb-5xl"
+    >
+      <div
+        class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3xl pt-3xl "
+      >
+        <div class="flex flex-col gap-xs">
+          <p class="text-body-md font-bold text-on-surface-muted">
+            {{ len (.Site.GetPage "section" "news").Pages }} articles
+          </p>
+          <h1
+            id="blog-heading"
+            class="text-heading-h3 font-black tracking-tight"
+          >
+            {{ T "menu__news" }}
+          </h1>
+        </div>
+        {{ partial "categories.html" . }}
+      </div>
+    </section>
+
+    <section
+      id="blog-articles"
+      aria-label="Articles"
+      class="max-w-360 mx-auto pb-4xl grid grid-cols-1 lg:grid-cols-[1fr_566px] gap-2xl"
+    >
+      {{ with .Site.GetPage "section" "news" }}
+        {{ $pages := .Pages.ByDate.Reverse }}
+        {{ with index $pages 0 }}
+          {{ partial "blog-card-featured.html" . }}
+        {{ end }}
+
+
+        <div class="flex flex-col">
+          {{ range $pages | after 1 | first 3 }}
+            {{ partial "blog-card-row.html" . }}
+          {{ end }}
+        </div>
+
+        <div class="lg:col-span-2 flex justify-end">
+          <a href="{{ relref . "/news" }}" class="btn btn-outlined btn-md">
+            <span>{{ T "all_articles" }}</span>
+            <span class="btn-icon">
+              <svg
+                viewBox="0 0 16.5 15.5"
+                fill="none"
+                class="icon-size-s"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0.75 7.75H15.75"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8.75 14.75L15.75 7.75L8.75 0.75"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </div>
+      {{ end }}
+    </section>
+  </main>
+{{ end }}

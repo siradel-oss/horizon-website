@@ -1,0 +1,45 @@
+/* ============================================================
+   Nav — Burger → X animation
+   Driven by aria-expanded="true" on #burger.
+   ============================================================ */
+
+.burger-bar {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform-origin: center;
+}
+
+#burger[aria-expanded="true"] {
+  & .burger-bar:first-child {
+    transform: translateY(7.25px) rotate(45deg);
+  }
+
+  & .burger-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  & .burger-bar:last-child {
+    transform: translateY(-7.25px) rotate(-45deg);
+  }
+}
+
+/* ============================================================
+   Active nav link — overrides the inactive hover/underline style
+   Applied via {{nav-*-active}} variable in header.html.
+   ============================================================ */
+.nav-link.is-active {
+  background: var(--color-secondary);
+  color: var(--color-on-surface);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-xs);
+
+  &::after {
+    display: none;
+  }
+
+  &:hover {
+    color: var(--color-on-surface);
+  }
+}

@@ -1,0 +1,33 @@
+/* ============================================================
+   OSS Design System — Entry point
+   ------------------------------------------------------------
+   ⚠️  IMPORTÉ DEPUIS assets/main.css APRÈS @import "tailwindcss"
+   Cet entry point ne contient QUE les tokens et utilities du DS.
+   Les imports composants (header, footer, feature-card, etc.) sont
+   gérés par assets/main.css (convention Hugo).
+
+   Order matters:
+     1. Primitives  (raw values — never used directly in app code)
+     2. Colors      (semantic background/text/border/button/icon)
+     3. Typography  (semantic font-sans, font-weight-*, text-*) + body
+     4. Tokens      (semantic spacing, radius, border-width, icon-size)
+     5. Custom      (gradients, shadows, violet, alias custom)
+     6. Utilities   (text/bg/border/icon façade — classes courtes)
+     7. Button      (composant DS)
+     8. Modal, Nav, Transitions (composants DS)
+   ============================================================ */
+
+@import "./primitives.css";
+@import "./colors.css";
+@import "./typography.css";
+@import "./tokens.css";
+@import "./custom-tokens.css";
+@import "./button.css";
+@import "./modal.css";
+@import "./nav.css";
+@import "./transitions.css";
+
+main[tabindex="-1"]:focus,
+main[tabindex="-1"]:focus-visible {
+  outline: none;
+}

@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <main
+    class="grow pt-15xl pb-4xl flex flex-col gap-10xl"
+    style="background: linear-gradient(var(--color-blue-800) 400px, var(--color-inverse-surface-strong) 600px);"
+  >
+    {{ range .Pages.ByWeight }}
+      {{- $anchor := (path.Split .Path).File -}}
+      {{ if .Params.section_layout }}
+        {{- $partial := printf "section-%s.html" .Params.section_layout -}}
+        <div
+          id="{{ $anchor }}"
+          class="section {{ .Params.section_container_class }}"
+        >
+          <div class="section__content">
+            {{ partial $partial . }}
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  </main>
+{{ end }}

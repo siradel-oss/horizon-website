@@ -1,0 +1,1 @@
+{{ .Content | transform.HTMLToMarkdown }}

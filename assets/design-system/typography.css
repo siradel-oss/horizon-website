@@ -1,0 +1,101 @@
+/* ============================================================
+   OSS Design System — Typography
+   ------------------------------------------------------------
+   Tokens sémantiques de typographie + body baseline.
+   Les primitives (`type-scale-*`, `type-font-family-*`,
+   `type-font-weight-*`) vivent dans primitives.css.
+   Le @font-face Satoshi Variable est déclaré dans index.css
+   (police self-hosted, fichiers dans src/assets/fonts/).
+   ============================================================ */
+
+@theme {
+  /* ============================================================
+     ⚠️  GÉNÉRÉ par design-system/scripts/sync-tokens.js — ne pas éditer manuellement.
+     Source : Tokens Studio DTCG (primitives/value + theme/light)
+     2026-06-29T12:17:00.141Z
+     ============================================================ */
+
+  /* ============================================================
+     SEMANTIC — Font family
+     Une seule famille dans le DS — on mappe `--font-sans` pour éviter
+     toute collision avec le namespace `--font-weight-*` (qui partage
+     le prefix `font-` en Tailwind v4).
+     Utilisation : class `font-sans` (ou simplement hériter de <body>)
+     ============================================================ */
+  --font-sans: var(--type-font-family-satoshi);
+
+  /* ============================================================
+     SEMANTIC — Font weights
+     Utilisation : class `font-{name}` (ex. font-heading-primary)
+     ============================================================ */
+  --font-weight-body-primary: var(--type-font-weight-regular);
+  --font-weight-body-secondary: var(--type-font-weight-medium);
+  --font-weight-body-tertiary: var(--type-font-weight-bold);
+  --font-weight-body-quaternary: var(--type-font-weight-black);
+  --font-weight-heading-primary: var(--type-font-weight-bold);
+  --font-weight-heading-secondary: var(--type-font-weight-bold);
+  --font-weight-heading-tertiary: var(--type-font-weight-black);
+
+  /* ============================================================
+     SEMANTIC — Typography (font-size + line-height)
+     Utilisation : class `text-{name}` (applique font-size + line-height)
+     ============================================================ */
+  --text-heading-h1: var(--type-scale-64);
+  --text-heading-h1--line-height: var(--type-scale-76);
+  --text-heading-h2: var(--type-scale-48);
+  --text-heading-h2--line-height: var(--type-scale-57);
+  --text-heading-h3: var(--type-scale-38);
+  --text-heading-h3--line-height: var(--type-scale-45);
+  --text-heading-h4: var(--type-scale-30);
+  --text-heading-h4--line-height: var(--type-scale-36);
+  --text-heading-h5: var(--type-scale-24);
+  --text-heading-h5--line-height: var(--type-scale-29);
+  --text-heading-h6: var(--type-scale-22);
+  --text-heading-h6--line-height: var(--type-scale-26);
+  --text-heading-display-h1: var(--type-scale-64);
+  --text-heading-display-h1--line-height: var(--type-scale-76);
+  --text-heading-display-h2: var(--type-scale-48);
+  --text-heading-display-h2--line-height: var(--type-scale-57);
+  --text-heading-display-h3: var(--type-scale-38);
+  --text-heading-display-h3--line-height: var(--type-scale-45);
+  --text-heading-display-h4: var(--type-scale-30);
+  --text-heading-display-h4--line-height: var(--type-scale-36);
+  --text-heading-display-button: var(--type-scale-28);
+  --text-heading-display-button--line-height: var(--type-scale-34);
+  --text-heading-h1-mobile: var(--type-scale-40);
+  --text-heading-h1-mobile--line-height: var(--type-scale-48);
+  --text-heading-h1-tablet: var(--type-scale-56);
+  --text-heading-h1-tablet--line-height: var(--type-scale-64);
+  --text-heading-h2-mobile: var(--type-scale-32);
+  --text-heading-h2-mobile--line-height: var(--type-scale-40);
+  --text-heading-h2-tablet: var(--type-scale-40);
+  --text-heading-h2-tablet--line-height: var(--type-scale-48);
+  --text-body-3xs: var(--type-scale-8);
+  --text-body-xs: var(--type-scale-13);
+  --text-body-xs--line-height: var(--type-scale-14);
+  --text-body-sm: var(--type-scale-14);
+  --text-body-sm--line-height: var(--type-scale-16);
+  --text-body-md: var(--type-scale-16);
+  --text-body-md--line-height: var(--type-scale-20);
+  --text-body-2xs: var(--type-scale-12);
+  --text-body-2xs--line-height: var(--type-scale-16);
+  --text-body-lg: var(--type-scale-18);
+  --text-body-lg--line-height: var(--type-scale-25);
+  --text-body-xl: var(--type-scale-28);
+  --text-body-xl--line-height: var(--type-scale-34);
+}
+
+/* ============================================================
+   Body baseline
+   Wrapped in @layer base so utilities (.text-on-primary, .text-on-surface…)
+   can still override these defaults via class on <body>.
+   ============================================================ */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text-body);
+    background: var(--color-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

@@ -1,0 +1,15 @@
+{{ $demos := hugo.Data.gallery.galleryDemos }}
+{{ range $id, $info := $demos }}
+  {{ $page := (dict
+    "title" $info.title
+    "path" $id
+    "slug" $id
+    "kind" "page"
+    "content" (dict
+    "value" $id
+    "mediaType" "text/html"
+    )
+    )
+    }}
+  {{ $.AddPage $page }}
+{{ end }}

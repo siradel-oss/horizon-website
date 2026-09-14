@@ -1,0 +1,33 @@
+{{- $dest := .Path }}
+{{- $url := urls.Parse $dest -}}
+{{- $page := .Page.GetPage $url.Path -}}
+
+{{- $lang := $url.Query.Get "lang" -}}
+{{- $langSite := index (where hugo.Sites "Language.Lang" $lang) 0 -}}
+{{- if $langSite -}}
+  {{- $page = $langSite.GetPage $url.Path -}}
+{{- else if not $url.Path -}}
+  {{- $page = .Page -}}
+{{- end -}}
+
+{{- $wantedFormat := or ($url.Query.Get "format") .Format "html" -}}
+
+{{- $isBroken := false -}}
+{{- if $page -}}
+  {{- $dest = $page.RelPermalink -}}
+
+  {{- with $page.OutputFormats.Get $wantedFormat -}}
+    {{- $dest = .RelPermalink -}}
+  {{- end -}}
+
+  {{- if $url.Fragment -}}
+    {{- $dest = printf "%s#%s" $dest $url.Fragment -}}
+    {{- if not ($page.Fragments.Identifiers.Contains $url.Fragment) -}}
+      {{- $isBroken = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- $isBroken = true -}}
+{{- end -}}
+
+{{- return (dict "isBroken" $isBroken "href" $dest) -}}

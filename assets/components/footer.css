@@ -1,0 +1,12 @@
+@layer components {
+  .footer {
+    &::before {
+      @apply absolute inset-x-0 top-0 h-px pointer-events-none content-[""];
+      background: var(--color-border-gradient-dark);
+    }
+
+    a {
+      @apply transition-colors duration-200 hover:text-secondary focus-visible:text-secondary;
+    }
+  }
+}

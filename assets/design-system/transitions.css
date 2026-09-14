@@ -1,0 +1,97 @@
+/* ============================================================
+   Transitions — Scroll-driven animations
+   Reusable reveal and parallax effects for all pages.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Sections slide down from above + fade in. The fade is what makes the
+     motion legible: a vertical translate alone is lost in the scroll motion. */
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-48px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal,
+  .reveal-cta,
+  .reveal-grid > *,
+  .reveal-grid-end > * {
+    animation-name: reveal;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+  }
+
+  /* Per-item (not the container): on mobile a single-column grid container is
+     far taller than the viewport, so animating it as one block leaves the top
+     items half-faded for a long scroll. Each item fades on its own entry. The
+     range is kept short so multi-column rows on desktop stay near-synchronous. */
+  .reveal,
+  .reveal-grid > * {
+    animation-range: cover 10% cover 35%;
+  }
+
+  /* Bottom-of-page: entry-based so the range always completes — cover is
+     unreachable when there's no scroll left below the element, which otherwise
+     leaves it stuck half-faded. */
+  .reveal-cta,
+  .reveal-grid-end > * {
+    animation-range: entry 10% entry 50%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes parallax-sm {
+    to {
+      transform: translateY(-160px);
+    }
+  }
+  @keyframes parallax-md {
+    to {
+      transform: translateY(-360px);
+    }
+  }
+  @keyframes parallax-lg {
+    to {
+      transform: translateY(-480px);
+    }
+  }
+  @keyframes parallax-xl {
+    to {
+      transform: translateY(-800px);
+    }
+  }
+
+  .parallax-sm,
+  .parallax-md,
+  .parallax-lg,
+  .parallax-xl {
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+  }
+
+  .parallax-sm {
+    animation-name: parallax-sm;
+    animation-range: 0% 40%;
+  }
+  .parallax-md {
+    animation-name: parallax-md;
+    animation-range: 0% 40%;
+  }
+  .parallax-lg {
+    animation-name: parallax-lg;
+    animation-range: 0% 40%;
+  }
+  .parallax-xl {
+    animation-name: parallax-xl;
+    animation-range: 0% 40%;
+  }
+}

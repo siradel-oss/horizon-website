@@ -1,0 +1,25 @@
+{{- $url := .Page.Resources.Get .Destination -}}
+{{- if not $url -}}
+  {{- errorf "Unable to find image resource for %q" .Destination -}}
+{{- end -}}
+{{- if .IsBlock -}}
+  <figure>
+    <img
+      src="{{ $url.RelPermalink }}"
+      {{- with .PlainText }}alt="{{ . }}"{{ end -}}
+      {{- range $k, $v := .Attributes }}
+        {{ $k | safeHTMLAttr }}="{{ $v }}"
+      {{- end -}}
+    />
+    {{- with .Title }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  <img
+    src="{{ $url.RelPermalink }}"
+    {{- with .PlainText }}alt="{{ . | safeHTMLAttr }}"{{ end -}}
+    {{- range $k, $v := .Attributes }}
+      {{ $k | safeHTMLAttr }}="{{ $v }}"
+    {{- end -}}
+    {{- with .Title }}title="{{ . | safeHTMLAttr }}"{{ end -}}
+  />
+{{- end -}}

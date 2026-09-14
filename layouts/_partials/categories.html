@@ -1,0 +1,23 @@
+<ul aria-label="Filtres" class="flex flex-wrap gap-md">
+  {{ $allPermalink := relref . "/news/" -}}
+  <li>
+    <a
+      {{ if eq $allPermalink $.RelPermalink }}aria-pressed="true"{{ end -}}
+      class="tag tag--filter"
+      href="{{ $allPermalink }}"
+      >{{ T "all" }}</a
+    >
+  </li>
+  {{ range $.Site.Taxonomies.categories }}
+    <li>
+      <a
+        {{ if eq .Page.RelPermalink $.RelPermalink }}
+          aria-pressed="true"
+        {{ end -}}
+        class="tag tag--filter"
+        href="{{ .Page.RelPermalink }}"
+        >{{ .Page.Title }}</a
+      >
+    </li>
+  {{ end -}}
+</ul>

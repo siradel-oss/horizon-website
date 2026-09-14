@@ -1,0 +1,57 @@
+<article
+  class="blog-card-row relative flex flex-col isolate first:rounded-tl-sm first:rounded-tr-sm last:rounded-bl-sm last:rounded-br-sm"
+>
+  <a
+    href="{{ .RelPermalink }}"
+    class="group flex items-center gap-lg lg:gap-10 p-2xl flex-1 hover:bg-inverse-surface focus-visible:bg-inverse-surface focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-secondary"
+  >
+    {{ $cover := (.Resources.Get .Params.thumbnail).Resize "150x100 q95 lossless" }}
+    <img
+      src="{{ $cover.RelPermalink }}"
+      alt="{{ .Params.thumbnailAlt }}"
+      class="w-32 h-19 rounded-xs object-cover bg-surface shrink-0"
+    />
+    <div class="flex flex-col gap-sm flex-1 min-w-0">
+      <div class="flex flex-row gap-sm">
+        {{ range .GetTerms "categories" }}
+          <p
+            class="inline-flex self-start border border-outline-default text-on-primary text-body-xs font-bold px-md py-xs rounded-xxs"
+          >
+            {{ .Title }}
+          </p>
+        {{ end }}
+      </div>
+      <h2
+        class="text-on-primary font-bold text-body-md wrap-break-word group-hover:text-secondary group-focus-visible:text-secondary"
+      >
+        {{ .Title }}
+      </h2>
+      <time
+        datetime="{{ .Date.Format "2006-01-02" }}"
+        class="text-on-surface-muted text-body-xs"
+        >{{ .Date.Format "2 January 2006" }}</time
+      >
+    </div>
+    <svg
+      viewBox="0 0 13 12"
+      fill="none"
+      aria-hidden="true"
+      class="w-3.5 h-3.5 shrink-0 text-secondary"
+    >
+      <path
+        d="M0.75 6H12"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M6.75 11.25L12 6L6.75 0.75"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </a>
+</article>

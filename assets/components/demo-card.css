@@ -1,0 +1,56 @@
+@layer components {
+  .demo-card {
+    @apply relative flex flex-col rounded-md overflow-hidden border border-outline-on-inverse bg-inverse-surface transition-shadow duration-300 ease-out;
+    isolation: isolate;
+
+    &:hover {
+      box-shadow:
+        0 0 0 1px var(--color-shadow-card-glow-ring),
+        0 0 28px 8px var(--color-shadow-card-glow-halo);
+    }
+
+    /* Keyboard focus — ring around the whole card, not just the text */
+    &:has(a:focus-visible) {
+      @apply outline-2 outline-offset-2 outline-secondary;
+    }
+
+    /* ---------- Thumbnail (first direct child) ---------- */
+    > div:first-child {
+      @apply aspect-[320/162] overflow-hidden bg-inverse-surface-strong;
+    }
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+
+    /* ---------- Body (second direct child) ---------- */
+    > div:last-child {
+      @apply flex flex-col gap-lg p-xl flex-1;
+    }
+
+    h3 {
+      @apply text-on-primary font-black text-heading-h6 tracking-tight;
+
+      /* Stretched link — title link covers the entire card */
+      a {
+        @apply text-on-primary no-underline;
+
+        &::after {
+          @apply absolute inset-0 z-10;
+          content: "";
+        }
+
+        /* The link itself shows no default outline; the card-level
+           :has(:focus-visible) rule above provides the visible focus. */
+        &:focus-visible {
+          @apply outline-none;
+        }
+      }
+    }
+
+    /* ---------- Tags ---------- */
+    ul {
+      @apply flex flex-wrap gap-sm;
+    }
+  }
+}

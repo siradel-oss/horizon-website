@@ -1,0 +1,47 @@
+{{- $demoData := index hugo.Data.gallery.galleryDemos (.Get 0) -}}
+{{- if not $demoData -}}
+  {{ errorf "Demo '%s' not found in data file 'galleryDemos'" (.Get 0) }}
+{{- end -}}
+<article class="blog-card-row relative rounded-sm">
+  <a
+    href="{{ relref .Page (printf "/gallery/%s" (.Get 0)) }}"
+    class="group flex items-center p-md gap-10 hover:bg-inverse-surface focus-visible:bg-inverse-surface focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-secondary no-underline"
+  >
+    <img
+      src="{{ (printf "gallery/assets/thumbnails/%s" $demoData.thumbnailFile) | relURL }}"
+      alt=""
+      class="w-52 h-30 rounded-xs object-cover bg-surface shrink-0"
+    />
+    <div class="flex flex-col gap-sm flex-1 min-w-0">
+      <h2
+        class="text-on-primary font-bold text-heading-h6 wrap-break-word group-hover:text-secondary group-focus-visible:text-secondary m-0"
+      >
+        {{ $demoData.title }}
+      </h2>
+      <p class="text-body-sm text-on-surface-muted">Go to gallery demo</p>
+    </div>
+    <div class="pr-lg">
+      <svg
+        viewBox="0 0 13 12"
+        fill="none"
+        aria-hidden="true"
+        class="w-3.5 h-3.5 shrink-0 text-secondary"
+      >
+        <path
+          d="M0.75 6H12"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M6.75 11.25L12 6L6.75 0.75"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  </a>
+</article>

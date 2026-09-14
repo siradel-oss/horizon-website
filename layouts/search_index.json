@@ -1,0 +1,28 @@
+{{- $index := slice -}}
+{{- $pages := (.Site.GetPage "section" "doc").RegularPagesRecursive -}}
+{{- range $pages -}}
+    {{- if not .Params.exclude_from_search_index -}}
+        {{- $index = $index | append (dict "title" .Title "url" .Permalink) -}}
+        {{- $p := . -}}
+        {{- if .Params.custom_toc}}
+            {{- range $entry := .Params.custom_toc -}}
+                {{- $index = $index | append (dict
+                        "title" (printf "%s &gt; %s" $p.Title $entry.title)
+                        "url" (printf "%s#%s" $p.Permalink $entry.anchor)
+                    ) -}}
+            {{- end -}}
+        {{- else -}}
+            {{- range $id, $h := .Fragments.HeadingsMap -}}
+                {{- $start_level := or $p.Params.toc_start_level 2 -}}
+                {{- $end_level := or $p.Params.toc_end_level 3 -}}
+                {{- if and (ge $h.Level $start_level) (le $h.Level $end_level) -}}
+                    {{- $index = $index | append (dict
+                            "title" (printf "%s &gt; %s" $p.Title ($h.Title | plainify))
+                            "url" (printf "%s#%s" $p.Permalink $h.ID)
+                        ) -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $index | jsonify -}}

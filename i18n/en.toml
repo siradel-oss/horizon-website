@@ -1,0 +1,17 @@
+menu__home = "Home"
+menu__features = "Features"
+menu__news = "Announcements"
+menu__getting_started = "Getting Started"
+menu__demos = "Demos"
+
+all = "All"
+all_articles = "All articles"
+read_more = "Read more"
+learn_more = "Learn more"
+all_right_reserved = "all rights reserved"
+
+previous_article = "Previous article"
+next_article = "Next article"
+
+previous_page = "Previous page"
+next_page = "Next page"

@@ -1,0 +1,27 @@
+{{- $dest := .Destination -}}
+{{- $text := .Text -}}
+{{- $attrs := slice -}}
+
+{{- if eq $dest "$proto" -}}
+  {{- $dest = printf "/doc/reference/HrzProtocol.%s?lang=en" $text -}}
+  {{- $text = (printf "<code>%s</code>" $text) | safeHTML -}}
+{{- end -}}
+
+{{- $url := urls.Parse $dest -}}
+{{- if $url.IsAbs -}}
+  {{- $attrs = $attrs | append "rel=\"external\"" -}}
+{{- else -}}
+  {{- $linkResult := partial "internal-link.html" (dict "Path" $dest "Page" .Page "Format" "html") -}}
+  {{- $dest = $linkResult.href -}}
+  {{- if $linkResult.isBroken -}}
+    {{- $attrs = $attrs | append "class=\"link-error\"" -}}
+    {{- if not .Page.Params.allow_broken_links -}}
+      {{- errorf "Broken link '%s' from page '%s'" $dest .Page.Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+
+<a href="{{ $dest }}" {{ (delimit $attrs " ") | safeHTMLAttr }}>{{ $text }}</a>
+
+{{- /**/ -}}

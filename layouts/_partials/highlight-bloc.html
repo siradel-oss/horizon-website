@@ -1,0 +1,42 @@
+<section
+  aria-labelledby="{{ .headingId }}"
+  class="highlight-bloc px-4xl py-3xl lg:py-5xl"
+>
+  <div
+    class="mx-auto max-w-360 bg-surface rounded-md flex flex-col lg:flex-row items-center justify-center gap-5xl lg:gap-8xl px-3xl py-8xl border-l-10 border-primary"
+  >
+    <div class="flex flex-col gap-3xl max-w-130">
+      <p
+        class="text-primary text-body-sm font-bold uppercase tracking-wider {{ .labelClass }}"
+      >
+        {{ .label }}
+      </p>
+      <div class="flex flex-col gap-xl highlight-bloc__content">
+        {{ templates.Inner . }}
+      </div>
+      <a
+        href="{{ .ctaUrl }}"
+        class="btn btn-filled-primary btn-md rounded-xs self-start {{ .ctaClass }}"
+      >
+        <span>{{ .ctaLabel }}</span>
+        <span class="btn-icon">
+          <img
+            src="{{ (resources.Get "images/icon-arrow-right-light.svg").RelPermalink }}"
+            alt=""
+            class="size-md"
+          />
+        </span>
+      </a>
+    </div>
+
+    <div
+      class="relative w-full max-w-161 bg-primary rounded-lg overflow-hidden shadow-2xl {{ .imageClass }}"
+    >
+      <img
+        src="{{ .image }}"
+        alt="{{ .imageAlt }}"
+        class="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,181 @@
+@layer components {
+  .doc-gradient-border {
+    &::before {
+      @apply absolute inset-0 p-px pointer-events-none;
+      content: "";
+      border-radius: inherit;
+      background: var(--color-border-gradient-dark);
+      mask:
+        linear-gradient(var(--color-white) 0 0) content-box,
+        linear-gradient(var(--color-white) 0 0);
+      mask-composite: exclude;
+    }
+  }
+
+  .doc-sidebar {
+    h2 {
+      @apply text-on-primary font-black text-body-lg tracking-tight;
+
+      &:not(:first-child) {
+        @apply mt-2xl;
+      }
+    }
+
+    ul {
+      @apply flex flex-col gap-1 mt-sm;
+    }
+
+    a {
+      @apply block text-primary-disabled text-body-md rounded-xs hover:underline;
+
+      &[aria-current="page"] {
+        @apply text-on-primary font-bold;
+      }
+    }
+  }
+
+  .doc-main-nav {
+    a[aria-current="page"] {
+      @apply text-secondary;
+    }
+  }
+  .doc-toc {
+    & h2 {
+      @apply text-on-primary font-black text-heading-h6 tracking-tight;
+    }
+
+    & ul {
+      @apply flex flex-col gap-1;
+    }
+
+    & a {
+      @apply block text-primary-disabled text-body-md rounded-xs hover:underline;
+    }
+
+    /* Nested subsection — indented, white */
+    & ul ul {
+      @apply pl-2xl mt-2xs;
+    }
+
+    & ul ul a {
+      @apply text-on-primary;
+    }
+  }
+
+  .doc-typography {
+    @apply text-on-primary text-body-md leading-normal;
+
+    > * {
+      @apply my-lg;
+
+      &:first-child {
+        @apply mt-0;
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mt-4xl;
+    }
+
+    h1 {
+      @apply text-heading-h2 font-black;
+    }
+    h2 {
+      @apply text-heading-h4 font-black;
+    }
+    h3 {
+      @apply text-heading-h5 font-bold;
+    }
+    h4 {
+      @apply text-heading-h6 font-bold;
+    }
+    h5 {
+      @apply text-body-lg font-bold;
+    }
+    h6 {
+      @apply text-body-md font-bold;
+    }
+
+    p {
+      @apply text-on-primary;
+    }
+
+    ul,
+    ol {
+      @apply pl-6 list-outside mb-md mt-xs;
+    }
+
+    ul {
+      @apply list-disc;
+    }
+
+    ol {
+      @apply list-decimal;
+    }
+
+    a {
+      @apply text-primary-text-muted underline hover:text-primary-hover;
+    }
+
+    pre {
+      @apply my-xl px-lg py-xs overflow-x-auto rounded-sm font-mono text-body-sm leading-normal bg-surface-overlay/30;
+    }
+
+    code {
+      @apply font-mono leading-normal px-1;
+    }
+
+    table {
+      @apply w-full my-3xl;
+
+      th,
+      td {
+        @apply p-2;
+      }
+
+      th {
+        @apply bg-surface-overlay/30 font-bold;
+      }
+
+      tr:not(:first-child) {
+        @apply border-t border-outline-strong-2;
+      }
+    }
+
+    hr {
+      @apply border-t border-outline-on-inverse my-2xl;
+
+      + * {
+        @apply mt-0;
+      }
+    }
+
+    figure {
+      @apply text-center;
+
+      img {
+        @apply bg-surface mx-auto rounded-xs p-1;
+      }
+
+      figcaption {
+        @apply text-primary-disabled text-body-sm italic mt-1 text-center;
+      }
+    }
+
+    .no-bg-img {
+      &.img,
+      img {
+        @apply bg-transparent p-0;
+      }
+    }
+  }
+
+  a.link-error {
+    @apply text-error decoration-dotted;
+  }
+}

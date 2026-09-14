@@ -1,0 +1,93 @@
+<div
+  class="max-w-360 mx-auto py-xl flex flex-col md:flex-row md:items-center md:justify-between gap-3xl mt-8xl"
+>
+  <nav aria-label="Fil d'Ariane">
+    <ol class="flex items-center gap-xs text-body-xs font-bold">
+      <li>
+        <a
+          href="{{ relref . "/news/latest/" }}"
+          class="text-on-primary hover:underline"
+          >{{ T "menu__news" }}</a
+        >
+      </li>
+      <li aria-hidden="true" class="text-on-primary">&rsaquo;</li>
+      <li>
+        <span aria-current="page" class="text-secondary">{{ .Title }}</span>
+      </li>
+    </ol>
+  </nav>
+  {{ partial "categories.html" . }}
+</div>
+
+{{ $pages := .Page.Pages }}
+{{ $paginator := .Page.Paginate $pages 8 }}
+<section
+  id="all-articles"
+  aria-label="Articles"
+  class="max-w-360 mx-auto py-xl pb-7xl"
+>
+  <div class="flex flex-col">
+    {{ range $paginator.Pages }}
+      {{ partial "blog-card-row.html" . }}
+    {{ end }}
+  </div>
+</section>
+
+{{ if gt $paginator.TotalPages 1 }}
+  <nav
+    aria-label="Navigation entre les articles"
+    class="border-t border-outline-on-inverse"
+  >
+    <div
+      class="max-w-360 mx-auto px-3xl py-xl flex items-center justify-between gap-3xl"
+    >
+      {{ with $paginator.Prev }}
+        <a href="{{ .URL }}" class="btn btn-ghost btn-sm">
+          <span class="btn-icon">
+            <svg viewBox="0 0 13 12" fill="none" aria-hidden="true">
+              <path
+                d="M12.25 6H1"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.25 0.75L1 6L6.25 11.25"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span>{{ T "previous_page" }}</span>
+        </a>
+      {{ end }}
+      <span class="grow"></span>
+      {{ with $paginator.Next }}
+        <a href="{{ .URL }}" class="btn btn-ghost btn-sm">
+          <span>{{ T "next_page" }}</span>
+          <span class="btn-icon">
+            <svg viewBox="0 0 13 12" fill="none" aria-hidden="true">
+              <path
+                d="M0.75 6H12"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.75 11.25L12 6L6.75 0.75"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </a>
+      {{ end }}
+    </div>
+  </nav>
+{{ end }}

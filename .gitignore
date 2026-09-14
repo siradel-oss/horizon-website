@@ -1,0 +1,10 @@
+resources/
+public/
+node_modules/
+hugo_stats.json
+.hugo_build.lock
+content/doc/
+data/gallery/
+data/version.json
+static/gallery/
+package-lock.json

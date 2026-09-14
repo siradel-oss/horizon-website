@@ -1,0 +1,107 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Horizon'
+enableMissingTranslationPlaceholders = true
+refLinksErrorLevel = 'WARNING'
+disablePathToLower = true
+
+[build]
+    [build.buildStats]
+        enable = true
+    [[build.cachebusters]]
+        source = 'assets/notwatching/hugo_stats\.json'
+        target = 'css'
+
+[module]
+    [[module.mounts]]
+        source = 'assets'
+        target = 'assets'
+    [[module.mounts]]
+        disableWatch = true
+        source = 'hugo_stats.json'
+        target = 'assets/notwatching/hugo_stats.json'
+
+[taxonomies]
+    category = "categories"
+
+[permalinks]
+    [permalinks.page]
+        news = "/news/:year/:month/:slug"
+    [permalinks.section]
+        news = "/news/all/"
+    [permalinks.term]
+        categories = "/news/:slug/"
+
+[[cascade]]
+  [cascade.params]
+    outputs = ["html", "markdown"]
+  [cascade.target]
+    path = "/docs/**"
+
+[languages]
+    [languages.en]
+        label = "EN"
+        locale = "en-us"
+    
+    [languages.fr]
+        label = "FR"
+        locale = "fr-fr"
+        [languages.fr.permalinks.section]
+            features = "/fonctionnalites/"
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
+  [markup.highlight]
+    style = "github-dark"
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+      [markup.goldmark.parser.attribute]
+        block = true
+    [markup.goldmark.extensions.extras.subscript]
+        enable = true
+    [markup.goldmark.extensions.extras.superscript]
+        enable = true
+
+[menus]
+    [[menus.main]]
+        identifier = "menu__features"
+        pageRef = "/features/"
+        weight = 10
+    [[menus.main]]
+        identifier = "menu__news"
+        pageRef = "/news/latest/"
+        weight = 20
+        params = { "language" = "en" }
+    [[menus.main]]
+        identifier = "menu__getting_started"
+        pageRef = "/doc/"
+        weight = 30
+        params = { "language" = "en" }
+    [[menus.main]]
+        identifier = "menu__demos"
+        pageRef = "/gallery/"
+        weight = 40
+        params = { "language" = "en" }
+    [[menus.doc]]
+        name = "Documentation"
+        pageRef = "/doc/"
+        weight = 10
+    [[menus.doc]]
+        name = "API Reference"
+        pageRef = "/doc/reference/"
+        weight = 20
+    [[menus.doc]]
+        name = "Developer's Guide"
+        pageRef = "/doc/dev_guide/"
+        weight = 30
+
+[uglyURLs]
+    doc = true
+    gallery = true
+
+[security]
+    allowContent = [".*"]

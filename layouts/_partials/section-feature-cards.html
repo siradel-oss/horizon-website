@@ -1,0 +1,24 @@
+{{- if .Title -}}
+  <h1 class="mb-4xl">{{ .Title }}</h1>
+{{- end }}
+<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-2xl">
+  {{- range $card := .Params.feature_cards -}}
+    {{- $thumb := ($.Resources.Get $card.image).Process "fill 450x300 lanczos webp q95" -}}
+    {{- $link := "" -}}
+    {{- if $card.link -}}
+      {{- $link = partial "internal-link.html" (dict "Path" $card.link "Page" $.Page) -}}
+      {{- if $link.isBroken -}}
+        {{- errorf "Broken link '%s' in feature card from page '%s'" $card.link $.Page.Path -}}
+      {{- else -}}
+        {{- $link = $link.href -}}
+      {{- end -}}
+    {{- end -}}
+    {{- partial "feature-card.html" (dict
+      "title" $card.title
+      "text" ($.RenderString $card.desc | safeHTML)
+      "image" $thumb.RelPermalink
+      "learn_more_url" $link
+      )
+    -}}
+  {{- end -}}
+</div>

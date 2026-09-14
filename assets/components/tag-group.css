@@ -1,0 +1,13 @@
+@layer components {
+  .tag-group {
+    @apply bg-inverse-surface border border-outline-on-inverse rounded-md p-xl flex flex-col gap-xl;
+
+    & h3 {
+      @apply font-bold text-heading-h6;
+    }
+
+    & ul {
+      @apply flex flex-wrap gap-lg;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@layer components {
+  .tag {
+    @apply inline-flex items-center justify-center px-2xl py-sm rounded-2xl text-body-xs font-bold whitespace-nowrap bg-surface text-on-surface;
+
+    &.tag--filled-yellow {
+      @apply bg-secondary;
+    }
+
+    &.tag--blue-light {
+      @apply bg-primary-accent;
+    }
+
+    &.tag--outlined {
+      @apply bg-transparent border border-outline-subtle text-on-primary;
+    }
+
+    &.tag--outlined-small {
+      @apply bg-transparent border border-outline-subtle text-on-primary px-md py-xs text-body-2xs;
+    }
+
+    &.tag--filter {
+      @apply bg-transparent border border-outline-subtle text-on-primary cursor-pointer transition-colors;
+
+      &:hover:not([disabled]),
+      &[aria-pressed="true"] {
+        background-color: var(--color-primary-accent);
+        @apply border-transparent text-on-surface;
+      }
+
+      &:focus-visible {
+        @apply outline-2 outline-offset-2 outline-secondary;
+      }
+    }
+
+    &[disabled] {
+      @apply opacity-50 cursor-not-allowed;
+    }
+  }
+}

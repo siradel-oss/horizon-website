@@ -1,0 +1,153 @@
+<header class="header absolute top-0 inset-x-0 z-30 px-3xl">
+  <a class="header__skip-link" href="#main">Aller au contenu</a>
+
+  <nav
+    aria-label="Principale"
+    class="relative z-10 flex items-center justify-between max-w-360 mx-auto py-xs"
+  >
+    <a href="{{ relref $ "/" }}" class="flex items-center gap-sm">
+      <span class="flex items-center py-md">
+        <img
+          src="{{ (resources.Get "images/logo-sce-pin.svg").RelPermalink }}"
+          alt="SCE"
+          class="w-6.5 h-[56px]"
+        />
+      </span>
+      <span class="flex items-center gap-sm">
+        <img
+          src="{{ (resources.Get "images/icon-arrow-right.svg").RelPermalink }}"
+          alt=""
+          class="w-2 h-3.25"
+        />
+        <span class="font-bold text-body-lg tracking-tight">#horizon</span>
+      </span>
+    </a>
+
+    <!-- Primary nav (desktop) -->
+    <ul
+      class="header__main-nav hidden lg:flex items-center gap-5xl text-body-md font-bold"
+    >
+      {{ range .Site.Menus.main -}}
+        {{- $name := T .Identifier -}}
+        {{- $url := .URL -}}
+
+        {{- if (and .Params.language .PageRef) -}}
+          {{- $url = relref $ (dict "path" .PageRef "lang" .Params.language) -}}
+        {{- end -}}
+
+        {{- $isCurrent := strings.HasPrefix $.RelPermalink (strings.TrimSuffix "index.html" $url) -}}
+
+
+        <li>
+          <a {{ if $isCurrent }}aria-current="page"{{ end }} href="{{ $url }}"
+            >{{ $name }}</a
+          >
+        </li>
+      {{ end }}
+    </ul>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-2xl">
+      <a
+        href="https://github.com/siradel-oss/horizon"
+        class="
+          inline-flex items-center gap-xs px-md py-xs rounded-xs bg-surface text-on-surface
+          text-body-md font-bold transition-colors hover:bg-primary-accent
+        "
+      >
+        <img
+          src="{{ (resources.Get "images/icon-github.svg").RelPermalink }}"
+          alt=""
+          class="w-4.5 h-4.25"
+        />
+        <span>GitHub</span>
+      </a>
+
+      <details
+        class="hidden lg:block relative text-body-xs text-on-primary font-bold"
+      >
+        <summary class="list-none">
+          <div
+            class="
+              inline-flex items-center gap-xs px-md py-2xs rounded-xs border border-on-primary hover:bg-surface/10
+              transition-colors cursor-pointer
+            "
+          >
+            <span aria-hidden="true">{{ .Site.Language.Label }}</span>
+            <svg
+              aria-hidden="true"
+              width="10"
+              height="6"
+              viewBox="0 0 10 6"
+              fill="none"
+              class="transition-transform [[open]_&]:rotate-180"
+            >
+              <path
+                d="M1 1l4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </summary>
+        <div
+          class="
+            absolute flex flex-col border-on-primary border rounded-xs mt-2 p-sm bg-inverse-surface
+            inset-x-0 whitespace-nowrap gap-xs
+          "
+        >
+          {{ range .AllTranslations }}
+            <a href="{{ .RelPermalink }}">{{ .Language.Label }}</a>
+          {{ end }}
+        </div>
+      </details>
+
+      <button
+        id="header__burger"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu — full screen overlay -->
+  <div
+    id="header__mobile-menu"
+    role="dialog"
+    aria-label="Menu de navigation"
+    aria-modal="true"
+    inert
+    class="lg:hidden fixed inset-0 bg-inverse-surface-strong flex flex-col justify-center items-center opacity-0 scale-95 pointer-events-none transition-[opacity,transform] duration-300 ease-in-out"
+  >
+    <ul class="flex flex-col gap-2xl text-center font-black">
+      {{ range .Site.Menus.main -}}
+        {{- $name := T .Identifier -}}
+        {{- $url := .URL -}}
+
+        {{- if (and .Params.language .PageRef) -}}
+          {{- $url = relref $ (dict "path" .PageRef "lang" .Params.language) -}}
+        {{- end -}}
+
+
+        <li><a href="{{ $url }}">{{ $name }}</a></li>
+      {{ end }}
+      <li class="pt-xl">
+        {{ range .AllTranslations }}
+          <a href="{{ .RelPermalink }}" class="text-body-xs"
+            >{{ .Language.Label }}</a
+          >
+        {{ end }}
+      </li>
+    </ul>
+  </div>
+</header>

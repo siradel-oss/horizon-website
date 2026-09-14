@@ -1,0 +1,27 @@
+{{ define "head" }}
+  {{ $manifest := index hugo.Data.gallery.manifest.gallery }}
+  {{ $jsFiles := index $manifest "js" }}
+  {{ $cssFiles := index $manifest "css" }}
+
+  {{ $coiSw := resources.Get "coi-serviceworker.js" }}
+  <script src="{{ $coiSw.RelPermalink }}"></script>
+
+  {{ range $jsFiles }}
+    <link rel="modulepreload" href="./{{ . }}" as="script" crossorigin />
+  {{ end }}
+  {{ range $cssFiles }}
+    <link rel="stylesheet" href="./{{ . }}" />
+  {{ end }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $manifest := index hugo.Data.gallery.manifest.gallery }}
+  {{ $jsFile := printf "./%s" (index $manifest "js" 0) }}
+  <main class="grow pt-10xl pb-lg px-lg flex flex-col bg-inverse-surface">
+    <div class="grow relative" id="hrz-gallery-app"></div>
+  </main>
+  <script type="module">
+      import { init } from {{ $jsFile | safeJSStr }};
+      init("#hrz-gallery-app", {{ .Slug }});
+  </script>
+{{ end }}

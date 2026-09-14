@@ -1,0 +1,29 @@
+<a
+  popovertarget="hero-modal"
+  aria-label="Ouvrir l'aperçu de la démo"
+  class="
+    hero-tile z-100 pointer-events-auto group
+    block overflow-hidden rounded-md cursor-pointer appearance-none border-0 bg-transparent p-0
+    {{ .class }}
+  "
+  href="{{ .url }}"
+>
+  <img
+    src="{{ .image }}"
+    alt=""
+    class="
+      w-full h-full object-cover
+      transition-[scale,opacity] duration-500 ease-in-out
+      group-hover:scale-105 group-hover:opacity-75
+    "
+  />
+  <span
+    class="absolute right-0 bottom-0 flex items-center justify-center p-sm rounded-br-sm bg-grey-950/80
+        -translate-x-3 -translate-y-3 transition-transform duration-300 ease-in-out
+        group-hover:translate-x-0 group-hover:translate-y-0"
+    ><img
+      src="{{ (resources.Get "images/icon-arrow-right-light.svg").RelPermalink }}"
+      alt=""
+      class="w-[16px] h-[16px] rotate-45"
+  /></span>
+</a>

@@ -1,0 +1,55 @@
+<article
+  class="blog-card-featured relative flex flex-col rounded-sm overflow-hidden bg-inverse-surface isolate"
+>
+  {{ $cover := (.Resources.Get .Params.thumbnail).Resize "600x q95 lossless" }}
+  <div class="h-55 overflow-hidden bg-inverse-surface-strong">
+    <img src="{{ $cover.RelPermalink }}" class="w-full h-full object-cover" />
+  </div>
+  <div class="flex flex-col gap-md p-3xl border-t border-secondary flex-1">
+    <div class="flex flex-row gap-sm">
+      {{ range .GetTerms "categories" }}
+        <p
+          class="inline-flex self-start bg-surface text-on-surface text-body-xs font-bold px-md py-xs rounded-xxs"
+        >
+          {{ .Title }}
+        </p>
+      {{ end }}
+    </div>
+    <h2 class="text-on-primary font-black text-heading-h5 tracking-tight">
+      {{ .Title }}
+    </h2>
+    <p class="text-on-primary text-body-md">{{ .Params.excerpt }}</p>
+    <div class="flex items-center justify-between mt-auto">
+      <time
+        datetime="{{ .Date.Format "2006-01-02" }}"
+        class="text-on-surface-muted text-body-xs"
+        >{{ .Date.Format "2 January 2006" }}</time
+      >
+      <a
+        href="{{ .RelPermalink }}"
+        class="blog-card-featured__cta btn btn-ghost btn-md"
+        aria-label="Read post: {{ .Title }}"
+      >
+        <span>{{ T "read_more" }}</span>
+        <span class="btn-icon">
+          <svg viewBox="0 0 13 12" fill="none" aria-hidden="true">
+            <path
+              d="M0.75 6H12"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6.75 11.25L12 6L6.75 0.75"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</article>

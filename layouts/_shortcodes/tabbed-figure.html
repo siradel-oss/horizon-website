@@ -1,0 +1,24 @@
+<div
+  class="tabbed-figure border border-outline-on-inverse rounded-md overflow-hidden"
+>
+  <div
+    class="tabbed-figure__tabs flex flex-row border-b border-outline-on-inverse"
+  >
+    {{ range .Params }}
+      <button
+        class="
+                    grow
+                    py-sm px-md cursor-pointer hover:bg-surface-overlay/30
+                    not-last:border-r border-outline-on-inverse
+                    text-body-sm font-bold
+                    aria-selected:text-on-surface aria-selected:bg-primary-accent
+                "
+      >
+        {{ . }}
+      </button>
+    {{ end }}
+  </div>
+  <div class="tabbed-figure__content p-md">
+    {{ .Inner | .Page.RenderString }}
+  </div>
+</div>

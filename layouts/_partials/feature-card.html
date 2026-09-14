@@ -1,0 +1,49 @@
+<article
+  class="feature-card relative flex flex-col rounded-md overflow-hidden transition-shadow duration-300 ease-out"
+>
+  <div class="aspect-5/3 overflow-hidden">
+    <img
+      src="{{ .image }}"
+      alt="{{ .title }}"
+      class="w-full h-full object-cover"
+    />
+  </div>
+  <div class="flex flex-col gap-lg flex-1 p-3xl bg-inverse-surface">
+    <h3 class="font-black tracking-tight text-body-xl {{ .titleClass }}">
+      {{ .title }}
+    </h3>
+    <div class="text-body-lg flex-1">{{ .text }}</div>
+    {{ if .learn_more_url }}
+      <a
+        href="{{ .learn_more_url }}"
+        class="btn btn-ghost btn-md self-start {{ .ctaClass }}"
+        aria-label="{{ T "learn_more" }}: {{ .title }}"
+      >
+        <span class="btn-icon">
+          <svg
+            viewBox="0 0 17 17"
+            fill="none"
+            class="size-lg"
+            aria-hidden="true"
+          >
+            <path
+              d="M0.75 8.25H15.75"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.25 0.75V15.75"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+        <span>{{ T "learn_more" }}</span>
+      </a>
+    {{ end }}
+  </div>
+</article>

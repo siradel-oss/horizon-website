@@ -1,0 +1,57 @@
+/* ============================================================
+   Modal — Popover API
+   Pure CSS/HTML — no JavaScript required.
+   Uses @starting-style for open/close transitions.
+   ============================================================ */
+
+#hero-modal {
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  width: min(92vw, 1100px);
+  height: min(82vh, 680px);
+  margin: auto;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.96) translateY(-12px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete;
+
+  &:popover-open {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  @starting-style {
+    &:popover-open {
+      opacity: 0;
+      transform: scale(0.96) translateY(-12px);
+    }
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    transition:
+      background 0.3s ease,
+      backdrop-filter 0.3s ease,
+      display 0.3s allow-discrete,
+      overlay 0.3s allow-discrete;
+  }
+
+  &:popover-open::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px);
+  }
+
+  @starting-style {
+    &:popover-open::backdrop {
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+    }
+  }
+}

@@ -1,0 +1,365 @@
+{{ define "main" }}
+  <main class="grow bg-inverse-surface-strong">
+    <section
+      aria-label="Hero"
+      class="relative rounded-bl-2xl rounded-br-4xl px-3xl pt-9xl pb-11xl lg:pt-16xl lg:pb-13xl lg:min-h-230"
+      style="
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0) 51%, var(--color-inverse-surface-strong) 94%),
+        var(--color-blue-800);
+    "
+    >
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 z-0 flex items-start justify-center pointer-events-none overflow-hidden"
+      >
+        <img
+          src="{{ (resources.Get "images/hero-lines.svg").RelPermalink }}"
+          alt=""
+          class="w-full max-w-360"
+        />
+      </div>
+
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 z-5 pointer-events-none"
+        style="background: radial-gradient(ellipse 65% 55% at 50% 38%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 70%);"
+      ></div>
+
+      <div class="hidden lg:block absolute inset-0 pointer-events-none">
+        <div class="relative h-[90%] max-w-360 mx-auto">
+          {{ partial "hero-tile.html" (dict
+            "class" "absolute left-0 bottom-[-3%] w-[26%] aspect-[340/390]"
+            "image" (.Resources.Get "images/dtm.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/ignSrtm" "lang" "en"))
+            )
+          }}
+          {{ partial "hero-tile.html" (dict
+            "class" "absolute right-0 bottom-[29%] w-[21%] aspect-296/330"
+            "image" (.Resources.Get "images/flat_overlay.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/lesArcs" "lang" "en"))
+            )
+          }}
+          {{ partial "hero-tile.html" (dict
+            "class" "absolute left-[30.5%] -bottom-10xl w-[32%] aspect-[380/235]"
+            "image" (.Resources.Get "images/globe.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/mapbox" "lang" "en"))
+            )
+          }}
+          {{ partial "hero-tile.html" (dict
+            "class" "absolute left-[65%] -bottom-3 w-[32%] aspect-[475/242]"
+            "image" (.Resources.Get "images/histogram.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/csvData" "lang" "en"))
+            )
+          }}
+        </div>
+      </div>
+
+      <!-- Hero content (centered) -->
+      <div
+        class="relative z-10 mx-auto max-w-360 flex flex-col items-center gap-3xl pt-2xl"
+      >
+        <div class="flex flex-col items-center gap-2xl">
+          <h1
+            class="font-black text-center tracking-tight text-heading-h1-mobile sm:text-heading-h1-tablet lg:text-heading-h1 max-w-302"
+          >
+            {{ .Params.hero.title | safeHTML }}
+          </h1>
+          <div class="flex gap-lg">
+            <img
+              src="{{ (resources.Get "images/linux.svg").RelPermalink }}"
+              alt="Linux"
+              class="h-[36px] sm:h-[43px] w-auto"
+            />
+            <img
+              src="{{ (resources.Get "images/windows.svg").RelPermalink }}"
+              alt="Windows"
+              class="h-[36px] sm:h-[43px] w-auto"
+            />
+            <img
+              src="{{ (resources.Get "images/webgl.svg").RelPermalink }}"
+              alt="WebGL"
+              class="h-[36px] sm:h-[43px] w-auto"
+            />
+          </div>
+        </div>
+        <p class="text-center text-body-md sm:text-heading-h6 max-w-160">
+          {{ .Params.hero.subtitle | safeHTML }}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-lg w-full sm:w-auto">
+          <a
+            href="{{ relref . (dict "path" "/gallery/" "lang" "en") }}"
+            class="btn btn-filled-white btn-md rounded-xs justify-center"
+          >
+            <span>{{ .Params.hero.see_demos }}</span>
+            <span class="btn-icon"
+              ><img
+                src="{{ (resources.Get "images/icon-arrow-right-cta.svg").RelPermalink }}"
+                alt=""
+                class="icon-size-s"
+            /></span>
+          </a>
+          <a
+            href="{{ relref . (dict "path" "/news/latest/" "lang" "en") }}"
+            class="btn btn-outlined btn-md rounded-xs justify-center"
+          >
+            <span>{{ .Params.hero.whats_new }}</span>
+            <span class="btn-icon"
+              ><img
+                src="{{ (resources.Get "images/icon-light-bulb.svg").RelPermalink }}"
+                alt=""
+                class="icon-size-xxl"
+            /></span>
+          </a>
+        </div>
+
+        <!-- Image tiles — mobile/tablet grid (hidden on lg+) -->
+        <div class="grid grid-cols-2 gap-sm w-full lg:hidden">
+          {{ partial "hero-tile.html" (dict
+            "class" "relative aspect-4/3"
+            "image" (.Resources.Get "images/dtm.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/ignSrtm" "lang" "en"))
+            )
+          }}
+          {{ partial "hero-tile.html" (dict
+            "class" "relative aspect-4/3"
+            "image" (.Resources.Get "images/flat_overlay.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/lesArcs" "lang" "en"))
+            )
+          }}
+          {{ partial "hero-tile.html" (dict
+            "class" "relative aspect-4/3"
+            "image" (.Resources.Get "images/globe.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/mapbox" "lang" "en"))
+            )
+          }}
+          {{ partial "hero-tile.html" (dict
+            "class" "relative aspect-4/3"
+            "image" (.Resources.Get "images/histogram.webp").RelPermalink
+            "url" (relref . (dict "path" "/gallery/csvData" "lang" "en"))
+            )
+          }}
+        </div>
+      </div>
+
+      <!-- Hero modal — Popover API (pure HTML/CSS, no JavaScript) -->
+      <!-- Replace iframe src with the actual demo URL when ready -->
+      <div
+        id="hero-modal"
+        popover
+        role="dialog"
+        aria-label="Aperçu Horizon"
+        aria-modal="true"
+      >
+        <div
+          class="relative w-full h-full bg-inverse-surface-strong flex flex-col"
+        >
+          <div
+            class="flex items-center justify-between px-2xl py-md shrink-0 border-b border-on-primary/10"
+          >
+            <span class="font-bold text-body-md tracking-tight text-on-primary"
+              >#horizon — aperçu</span
+            >
+            <button
+              popovertarget="hero-modal"
+              popovertargetaction="hide"
+              aria-label="Fermer la fenêtre"
+              class="p-xs rounded-xs text-on-primary hover:bg-surface/10 transition-colors cursor-pointer appearance-none border-0 bg-transparent"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1 1l14 14M15 1L1 15"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="relative flex-1 min-h-0">
+            <iframe
+              src="about:blank"
+              title="Démo Horizon"
+              class="w-full h-full border-0"
+              allowfullscreen
+            ></iframe>
+            <!-- Placeholder visible tant que l'iframe est vide -->
+            <div
+              class="absolute inset-0 flex flex-col items-center justify-center gap-lg text-on-primary/30 pointer-events-none"
+            >
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="44"
+                  height="44"
+                  rx="8"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="8"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M24 8v6M24 34v6M8 24h6M34 24h6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <p class="text-body-md">Contenu à venir</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      id="features"
+      aria-labelledby="features-heading"
+      class="bg-inverse-surface-strong px-3xl py-11xl lg:py-16xl"
+    >
+      <div class="mx-auto max-w-360 flex flex-col items-center gap-6xl">
+        <header class="flex flex-col items-center gap-md text-center">
+          <p
+            class="text-secondary text-body-sm font-bold uppercase tracking-wider"
+          >
+            {{ .Params.features.title }}
+          </p>
+          <h2
+            id="features-heading"
+            class="font-black tracking-tight text-heading-h2-mobile sm:text-heading-h2-tablet lg:text-heading-h2"
+          >
+            {{ .Params.features.subtitle | safeHTML }}
+          </h2>
+          <p class="text-body-md sm:text-body-lg max-w-[720px]">
+            {{ .Params.features.desc | safeHTML }}
+          </p>
+        </header>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5xl w-full"
+        >
+          {{ range .Params.features.cards }}
+            {{ partial "feature-card.html" (dict
+              "image" ($.Resources.Get .image).RelPermalink
+              "title" .title
+              "text" .desc
+              "learn_more_url" (relref $ .url)
+              )
+            }}
+          {{ end }}
+        </div>
+      </div>
+    </section>
+
+    {{ with partial "highlight-bloc.html" (dict
+      "Params" .Params
+      "label" .Params.platform.title
+      "headingId" "platform-heading"
+      "ctaLabel" (T "learn_more")
+      "ctaUrl" (relref . "/features/#01-platform")
+      "image" (.Resources.Get "images/platform.webp").RelPermalink
+      )
+    }}
+      <h2 id="platform-heading">
+        {{ .Params.platform.subtitle }}
+      </h2>
+      <p>
+        {{ .Params.platform.desc | safeHTML }}
+      </p>
+      <ul>
+        {{ range .Params.platform.list }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    {{ end }}
+
+
+    <section
+      aria-labelledby="usecases-heading"
+      class="px-3xl py-11xl lg:px-6xl"
+      style="background:
+             linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 100%),
+             linear-gradient(180deg, var(--color-inverse-surface-strong) 0%, rgba(102,102,102,0) 33%),
+             radial-gradient(circle at 40% 30%, rgba(0,0,0,0.7) 0%, rgba(102,102,102,0) 60%),
+             var(--color-blue-800);"
+    >
+      <div class="mx-auto max-w-360 flex flex-col gap-3xl items-center">
+        <header class="flex flex-col items-center gap-md text-center">
+          <p
+            class="text-secondary text-body-sm font-bold uppercase tracking-wider"
+          >
+            {{ .Params.usecase.title }}
+          </p>
+          <h2
+            class="font-black tracking-tight text-heading-h2-mobile sm:text-heading-h2-tablet lg:text-heading-h2"
+          >
+            <span id="usecases-heading"
+              >{{ .Params.usecase.subtitle | safeHTML }}</span
+            >
+          </h2>
+          <p class="text-body-md sm:text-body-lg">
+            {{ .Params.usecase.desc | safeHTML }}
+          </p>
+        </header>
+
+        <!-- Cards 2×2 grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2xl w-full">
+          {{ range .Params.usecase.cards }}
+            {{ partial "usecase-card.html" (dict
+              "number" .number
+              "title" .title
+              "text" .desc
+              "icon" (resources.Get .icon).RelPermalink
+              )
+            }}
+          {{ end }}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="bg-inverse-surface-strong border-t border-outline-on-inverse px-3xl py-11xl flex flex-col items-center justify-center gap-3xl text-center"
+    >
+      <p class="text-secondary text-body-sm font-bold uppercase tracking-wider">
+        {{ .Params.cta.title }}
+      </p>
+      <h2
+        class="font-black tracking-tight text-heading-h2-mobile sm:text-heading-h2-tablet lg:text-heading-h2"
+      >
+        {{ .Params.cta.subtitle | safeHTML }}
+      </h2>
+      <p class="text-body-md sm:text-body-lg max-w-[640px]">
+        {{ .Params.cta.desc | safeHTML }}
+      </p>
+      <a
+        href="mailto:opensource@siradel.com"
+        class="btn btn-filled-white btn-md rounded-xs"
+      >
+        <span>{{ .Params.cta.contact_us }}</span>
+        <span class="btn-icon"
+          ><img
+            src="{{ (resources.Get "images/icon-arrow-right-black.svg").RelPermalink }}"
+            alt=""
+            class="icon-size-s"
+        /></span>
+      </a>
+    </section>
+  </main>
+{{ end }}

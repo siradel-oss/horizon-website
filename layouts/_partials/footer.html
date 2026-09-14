@@ -1,0 +1,21 @@
+<footer class="footer relative bg-inverse-surface py-xl">
+  <div
+    class="max-w-360 mx-auto px-3xl flex flex-col md:flex-row gap-md md:items-center md:justify-between"
+  >
+    <div class="flex items-center gap-lg">
+      <a href="https://siradel.com" class="font-bold"> Siradel </a>
+      <p class="text-on-primary text-body-sm">
+        {{ $currentYear := now.Format "2006" }}
+        Copyright
+        {{ if (eq $currentYear "2026") -}}
+          2026
+        {{- else -}}
+          2026-{{ $currentYear }}
+        {{- end }}
+      </p>
+    </div>
+    <ul class="flex flex-wrap gap-2xl text-on-primary text-body-sm">
+      <li><a href="https://github.com/siradel-oss/horizon">GitHub</a></li>
+    </ul>
+  </div>
+</footer>

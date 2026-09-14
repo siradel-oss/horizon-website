@@ -1,0 +1,14 @@
+@layer components {
+  .blog-card-row {
+    &::before {
+      @apply absolute inset-0 p-px pointer-events-none;
+      content: "";
+      border-radius: inherit;
+      background: var(--color-border-gradient-dark);
+      mask:
+        linear-gradient(var(--color-white) 0 0) content-box,
+        linear-gradient(var(--color-white) 0 0);
+      mask-composite: exclude;
+    }
+  }
+}

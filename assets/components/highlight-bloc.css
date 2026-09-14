@@ -1,0 +1,26 @@
+@layer components {
+  .highlight-bloc {
+    .highlight-bloc__content {
+      h2 {
+        @apply font-black tracking-tight text-on-surface text-heading-h2-mobile sm:text-heading-h2-tablet lg:text-heading-h2;
+      }
+
+      p {
+        @apply text-on-surface-body text-body-lg! sm:text-heading-h6;
+      }
+
+      ul {
+        @apply flex flex-col gap-md;
+      }
+
+      li {
+        @apply flex items-center gap-md text-on-surface-body text-body-lg font-bold;
+      }
+
+      li::before {
+        content: "";
+        @apply bg-secondary rounded-xs w-sm h-sm shrink-0;
+      }
+    }
+  }
+}

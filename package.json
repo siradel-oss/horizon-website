@@ -1,0 +1,23 @@
+{
+  "name": "hrz-oss-site",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "format": "prettier --write .",
+    "dev": "hugo server -M"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "prettier": "^3.8.3",
+    "prettier-plugin-go-template": "^0.0.15",
+    "tailwindcss": "^4.2.2"
+  },
+  "dependencies": {
+    "fuse.js": "^7.5.0"
+  }
+}
