@@ -80,10 +80,11 @@ hugo new content content/news/2026-09-17-version-26-0-0/index.md
 
 Don't forget to edit the front matter and include a thumbnail.
 Use one of the following categories:
+
 - release
 - technical
 - community
-- *add more here as the need arises*
+- _add more here as the need arises_
 
 Old articles (such as release notes) might have their links become broken.
 This prevents the site from building.

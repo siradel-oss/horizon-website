@@ -8,9 +8,6 @@ import path from "node:path";
 import os from "node:os";
 import { execSync } from "node:child_process";
 
-const DEFAULT_DOCUMENTATION_URL = "https://github.com/siradel-oss/horizon/releases/download/v26.0.0/horizon-documentation-26.0.0.tar.gz";
-const DEFAULT_GALLERY_URL = "https://github.com/siradel-oss/horizon/releases/download/v26.0.0/horizon-gallery-26.0.0.tar.gz";
-
 const HTTP_RE = /^https?:\/\//i;
 
 const MAX_REDIRECTS = 10;
@@ -20,7 +17,12 @@ function requestWithRedirects(url, redirectsLeft = MAX_REDIRECTS) {
     const proto = url.startsWith("https") ? https : http;
     const req = proto.get(
       url,
-      { headers: { "User-Agent": "horizon-website-fetch-content", Accept: "*/*" } },
+      {
+        headers: {
+          "User-Agent": "horizon-website-fetch-content",
+          Accept: "*/*",
+        },
+      },
       (res) => {
         const { statusCode, headers } = res;
         if (statusCode >= 300 && statusCode < 400 && headers.location) {
@@ -52,7 +54,9 @@ async function downloadFile(url, destPath) {
     res.pipe(file);
     res.on("error", reject);
     file.on("error", reject);
-    file.on("finish", () => file.close((err) => (err ? reject(err) : resolve())));
+    file.on("finish", () =>
+      file.close((err) => (err ? reject(err) : resolve())),
+    );
   }).catch((err) => {
     fs.rmSync(destPath, { force: true });
     throw err;
@@ -63,9 +67,12 @@ function extractArchive(archivePath, extractDir) {
   const absArchive = path.resolve(archivePath);
   console.log("Extracting archive:", absArchive);
   fs.mkdirSync(extractDir, { recursive: true });
-  execSync(`tar -xzf "${path.basename(absArchive)}" -C "${path.resolve(extractDir)}"`, {
-    cwd: path.dirname(absArchive),
-  });
+  execSync(
+    `tar -xzf "${path.basename(absArchive)}" -C "${path.resolve(extractDir)}"`,
+    {
+      cwd: path.dirname(absArchive),
+    },
+  );
 }
 
 async function downloadExtractArchive(archiveUrl, tmpDir, extractDirName) {
@@ -131,13 +138,43 @@ function extractDocumentationData(docPath) {
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  let doc = DEFAULT_DOCUMENTATION_URL;
-  let gallery = DEFAULT_GALLERY_URL;
+  let doc = null;
+  let gallery = null;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--doc" && args[i + 1]) doc = args[++i];
     else if (args[i] === "--gallery" && args[i + 1]) gallery = args[++i];
   }
   return { doc, gallery };
+}
+
+async function fetchLatestUrls() {
+  const latestReleaseApiUrl =
+    "https://api.github.com/repos/siradel-oss/horizon/releases/latest";
+  const manifest = await fetch(latestReleaseApiUrl, {
+    headers: {
+      "User-Agent": "horizon-website-fetch-content",
+      Accept: "application/vnd.github.v3+json",
+    },
+  }).then((res) => res.json());
+
+  console.log(`Latest version is: ${manifest.name}`);
+
+  function findAssetUrl(assetPartialName) {
+    const asset = manifest.assets.find((a) =>
+      a.name.includes(assetPartialName),
+    );
+    if (!asset) {
+      throw new Error(
+        `Asset with name containing "${assetPartialName}" not found in latest release.`,
+      );
+    }
+    return asset.browser_download_url;
+  }
+
+  return {
+    doc: findAssetUrl("horizon-documentation"),
+    gallery: findAssetUrl("horizon-gallery"),
+  };
 }
 
 async function main() {
@@ -147,7 +184,12 @@ async function main() {
     );
   }
 
-  const { doc, gallery } = parseArgs();
+  let { doc, gallery } = parseArgs();
+  if (doc === null || gallery === null) {
+    const { doc: latestDoc, gallery: latestGallery } = await fetchLatestUrls();
+    doc = doc || latestDoc;
+    gallery = gallery || latestGallery;
+  }
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "fetch-content-"));
 
   try {
