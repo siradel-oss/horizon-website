@@ -68,3 +68,23 @@ It is triggered manually, by giving the release tag to publish. See the ["Deploy
 ```
 pnpm format
 ```
+
+## Creating an article
+
+```
+hugo new content content/news/yyyy-mm-dd-title-slug/index.md
+
+# Example:
+hugo new content content/news/2026-09-17-version-26-0-0/index.md
+```
+
+Don't forget to edit the front matter and include a thumbnail.
+Use one of the following categories:
+- release
+- technical
+- community
+- *add more here as the need arises*
+
+Old articles (such as release notes) might have their links become broken.
+This prevents the site from building.
+You can accept links being broken for an article by adding `allow_broken_links = true` to the front matter. The link will appear red but the site will build.

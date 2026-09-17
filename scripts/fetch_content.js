@@ -8,35 +8,64 @@ import path from "node:path";
 import os from "node:os";
 import { execSync } from "node:child_process";
 
-const DEFAULT_DOCUMENTATION_URL = "";
-const DEFAULT_GALLERY_URL = "";
+const DEFAULT_DOCUMENTATION_URL = "https://github.com/siradel-oss/horizon/releases/download/v26.0.0/horizon-documentation-26.0.0.tar.gz";
+const DEFAULT_GALLERY_URL = "https://github.com/siradel-oss/horizon/releases/download/v26.0.0/horizon-gallery-26.0.0.tar.gz";
 
 const HTTP_RE = /^https?:\/\//i;
 
-function downloadFile(url, destPath) {
+const MAX_REDIRECTS = 10;
+
+function requestWithRedirects(url, redirectsLeft = MAX_REDIRECTS) {
   return new Promise((resolve, reject) => {
     const proto = url.startsWith("https") ? https : http;
-    const file = fs.createWriteStream(destPath);
-    proto
-      .get(url, (res) => {
-        if (res.statusCode !== 200) {
-          reject(new Error(`HTTP ${res.statusCode} for ${url}`));
+    const req = proto.get(
+      url,
+      { headers: { "User-Agent": "horizon-website-fetch-content", Accept: "*/*" } },
+      (res) => {
+        const { statusCode, headers } = res;
+        if (statusCode >= 300 && statusCode < 400 && headers.location) {
+          res.resume();
+          if (redirectsLeft === 0) {
+            reject(new Error(`Too many redirects for ${url}`));
+            return;
+          }
+          const next = new URL(headers.location, url).toString();
+          resolve(requestWithRedirects(next, redirectsLeft - 1));
           return;
         }
-        res.pipe(file);
-        file.on("finish", () => file.close(resolve));
-      })
-      .on("error", (err) => {
-        fs.unlink(destPath, () => {});
-        reject(err);
-      });
+        if (statusCode !== 200) {
+          res.resume();
+          reject(new Error(`HTTP ${statusCode} for ${url}`));
+          return;
+        }
+        resolve(res);
+      },
+    );
+    req.on("error", reject);
+  });
+}
+
+async function downloadFile(url, destPath) {
+  const res = await requestWithRedirects(url);
+  await new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(destPath);
+    res.pipe(file);
+    res.on("error", reject);
+    file.on("error", reject);
+    file.on("finish", () => file.close((err) => (err ? reject(err) : resolve())));
+  }).catch((err) => {
+    fs.rmSync(destPath, { force: true });
+    throw err;
   });
 }
 
 function extractArchive(archivePath, extractDir) {
-  console.log("Extracting archive:", archivePath);
+  const absArchive = path.resolve(archivePath);
+  console.log("Extracting archive:", absArchive);
   fs.mkdirSync(extractDir, { recursive: true });
-  execSync(`tar -xzf "${archivePath}" -C "${extractDir}"`);
+  execSync(`tar -xzf "${path.basename(absArchive)}" -C "${path.resolve(extractDir)}"`, {
+    cwd: path.dirname(absArchive),
+  });
 }
 
 async function downloadExtractArchive(archiveUrl, tmpDir, extractDirName) {
