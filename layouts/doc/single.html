@@ -139,7 +139,16 @@
               {{ if .Params.custom_toc }}
                 <ul>
                   {{ range .Params.custom_toc }}
-                    <li><a href="#{{ .anchor }}">{{ .title }}</a></li>
+                    <li>
+                      <a href="#{{ .anchor }}">{{ .title }}</a>
+                      {{ if .children }}
+                        <ul>
+                          {{ range .children }}
+                            <li><a href="#{{ .anchor }}">{{ .title }}</a></li>
+                          {{ end }}
+                        </ul>
+                      {{ end }}
+                    </li>
                   {{ end }}
                 </ul>
               {{ else }}

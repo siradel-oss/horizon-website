@@ -10,6 +10,14 @@
                         "title" (printf "%s &gt; %s" $p.Title $entry.title)
                         "url" (printf "%s#%s" $p.Permalink $entry.anchor)
                     ) -}}
+                {{- if $entry.children -}}
+                    {{- range $child := $entry.children -}}
+                        {{- $index = $index | append (dict
+                                "title" (printf "%s &gt; %s &gt; %s" $p.Title $entry.title $child.title)
+                                "url" (printf "%s#%s" $p.Permalink $child.anchor)
+                            ) -}}
+                    {{- end -}}
+                {{- end -}}
             {{- end -}}
         {{- else -}}
             {{- range $id, $h := .Fragments.HeadingsMap -}}
