@@ -2,8 +2,14 @@
   <div
     class="max-w-360 mx-auto px-3xl flex flex-col md:flex-row gap-md md:items-center md:justify-between"
   >
-    <div class="flex items-center gap-lg">
-      <a href="https://siradel.com" class="font-bold"> Siradel </a>
+    <div class="flex items-center gap-2xl">
+      <a href="https://siradel.com" class="font-bold">
+        <img
+          src="{{ (resources.Get "images/siradel-logo.svg").RelPermalink }}"
+          alt="Siradel Logo"
+          class="h-3.5"
+        />
+      </a>
       <p class="text-on-primary text-body-sm">
         {{ $currentYear := now.Format "2006" }}
         Copyright
