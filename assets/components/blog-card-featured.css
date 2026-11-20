@@ -1,5 +1,7 @@
 @layer components {
   .blog-card-featured {
+    @apply bg-inverse-surface-strong;
+
     &::before {
       @apply absolute inset-0 p-px pointer-events-none;
       content: "";

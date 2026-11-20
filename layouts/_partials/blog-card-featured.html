@@ -1,5 +1,5 @@
 <article
-  class="blog-card-featured relative flex flex-col rounded-sm overflow-hidden bg-inverse-surface isolate"
+  class="blog-card-featured relative flex flex-col rounded-sm overflow-hidden bg-inverse-surface-strong isolate"
 >
   {{ $cover := (.Resources.Get .Params.thumbnail).Resize "600x q95 lossless" }}
   <div class="h-55 overflow-hidden bg-inverse-surface-strong">
@@ -22,7 +22,7 @@
     <div class="flex items-center justify-between mt-auto">
       <time
         datetime="{{ .Date.Format "2006-01-02" }}"
-        class="text-on-surface-muted text-body-xs"
+        class="text-on-inverse-surface-dim text-body-xs"
         >{{ .Date.Format "2 January 2006" }}</time
       >
       <a
