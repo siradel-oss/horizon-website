@@ -12,7 +12,6 @@
 
 {{- $wantedFormat := or ($url.Query.Get "format") .Format "html" -}}
 
-{{- $isBroken := false -}}
 {{- if $page -}}
   {{- $dest = $page.RelPermalink -}}
 
@@ -23,11 +22,11 @@
   {{- if $url.Fragment -}}
     {{- $dest = printf "%s#%s" $dest $url.Fragment -}}
     {{- if not ($page.Fragments.Identifiers.Contains $url.Fragment) -}}
-      {{- $isBroken = true -}}
+      {{- return (dict "isBroken" true) -}}
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{- $isBroken = true -}}
+  {{- return (dict "isBroken" true) -}}
 {{- end -}}
 
-{{- return (dict "isBroken" $isBroken "href" $dest) -}}
+{{- return (dict "href" $dest) -}}

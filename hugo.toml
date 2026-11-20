@@ -50,8 +50,6 @@ disablePathToLower = true
     [languages.fr]
         label = "FR"
         locale = "fr-fr"
-        [languages.fr.permalinks.section]
-            features = "/fonctionnalites/"
 
 [markup]
   [markup.tableOfContents]
@@ -110,5 +108,5 @@ disablePathToLower = true
 [security]
     allowContent = [".*"]
     [security.exec]
-        # Hugo >= 0.170 no longer allows tailwindcss by default; this list replaces the defaults.
+        # Hugo >= 0.165 no longer allows tailwindcss by default; this list replaces the defaults.
         allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
