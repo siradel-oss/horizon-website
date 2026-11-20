@@ -13,6 +13,10 @@ disablePathToLower = true
         target = 'css'
 
 [module]
+    # Keep in sync with .hugo-version (the exact version used for deployment).
+    [module.hugoVersion]
+        extended = true
+        min = '0.170.1'
     [[module.mounts]]
         source = 'assets'
         target = 'assets'
@@ -42,7 +46,7 @@ disablePathToLower = true
     [languages.en]
         label = "EN"
         locale = "en-us"
-    
+
     [languages.fr]
         label = "FR"
         locale = "fr-fr"
@@ -105,3 +109,6 @@ disablePathToLower = true
 
 [security]
     allowContent = [".*"]
+    [security.exec]
+        # Hugo >= 0.170 no longer allows tailwindcss by default; this list replaces the defaults.
+        allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']

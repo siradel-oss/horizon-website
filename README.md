@@ -5,7 +5,9 @@ Static site for the Horizon open-source project, built with [Hugo](https://gohug
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 24+
-- [Hugo Extended](https://gohugo.io/installation/) 0.162.1+
+- [Hugo Extended](https://gohugo.io/installation/), version given in [`.hugo-version`](.hugo-version)
+
+The deployment workflow builds the site with the exact Hugo version in `.hugo-version`. When upgrading Hugo, update that file and `module.hugoVersion.min` in `hugo.toml`.
 
 ### Install Hugo (Extended)
 
