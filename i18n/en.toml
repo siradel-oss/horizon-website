@@ -19,7 +19,7 @@ next_page = "Next page"
 sce_ecosystem = "SCE Ecosystem"
 
 not_found_title = "Page not found"
-not_found_text = "This page does not exist or has moved. The documentation, demos and announcements are all reachable from the home page."
+not_found_text = "This page does not exist or has moved."
 back_home = "Back to home"
 
 gallery_demo_description = "{{ .Title }}: an interactive Horizon demo running live in your browser."

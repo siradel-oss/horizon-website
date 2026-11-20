@@ -19,7 +19,7 @@ next_page = "Page suivante"
 sce_ecosystem = "Écosystème SCE"
 
 not_found_title = "Page introuvable"
-not_found_text = "Cette page n'existe pas ou a été déplacée. La documentation, les démos et les annonces sont accessibles depuis l'accueil."
+not_found_text = "Cette page n'existe pas ou a été déplacée."
 back_home = "Retour à l'accueil"
 
 gallery_demo_description = "{{ .Title }} : une démo interactive d'Horizon, exécutée en direct dans votre navigateur."
