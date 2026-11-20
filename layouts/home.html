@@ -44,6 +44,7 @@
             "class" "absolute left-[30.5%] -bottom-10xl w-[32%] aspect-[380/235]"
             "image" (.Resources.Get "images/globe.webp").RelPermalink
             "url" (relref . (dict "path" "/gallery/mapbox" "lang" "en"))
+            "fetchpriority" "high"
             )
           }}
           {{ partial "hero-tile.html" (dict
@@ -131,6 +132,7 @@
             "class" "relative aspect-4/3"
             "image" (.Resources.Get "images/globe.webp").RelPermalink
             "url" (relref . (dict "path" "/gallery/mapbox" "lang" "en"))
+            "fetchpriority" "high"
             )
           }}
           {{ partial "hero-tile.html" (dict

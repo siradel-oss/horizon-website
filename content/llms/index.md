@@ -2,6 +2,8 @@
 outputs = ["markdown"]
 layout = "llms_txt"
 url = "/llms.txt"
+[sitemap]
+    disable = true
 +++
 
 # Horizon

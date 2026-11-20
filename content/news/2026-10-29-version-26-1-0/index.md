@@ -1,10 +1,10 @@
 +++
 date = '2026-10-29'
 title = 'Version 26.1.0'
+description = 'Horizon 26.1.0 simplifies the vector geometry API, keeps multi-geometries as single features, supports GeoJSON geometry collections and adds options for the sun position.'
 slug = 'version-26.1.0'
 categories = ["release"]
 thumbnail = 'thumbnail.webp'
-excerpt = ""
 +++
 
 Version 26.1.0 of Horizon is now available, improving handling of vector

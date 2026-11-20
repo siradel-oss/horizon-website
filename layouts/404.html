@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <main
+    id="main"
+    tabindex="-1"
+    class="grow flex items-center bg-inverse-surface-strong pt-22 px-3xl"
+  >
+    <div
+      class="mx-auto flex flex-col items-center gap-2xl max-w-205 py-11xl text-center"
+    >
+      <p class="text-primary-disabled text-body-xs font-bold uppercase">404</p>
+      <h1
+        class="font-black text-balance tracking-tight text-heading-h2-mobile sm:text-heading-h2-tablet lg:text-heading-h2"
+      >
+        {{ T "not_found_title" }}
+      </h1>
+      <p class="text-body-md sm:text-body-lg tracking-tight">
+        {{ T "not_found_text" }}
+      </p>
+      <a
+        href="{{ site.Home.RelPermalink }}"
+        class="btn btn-filled-white btn-md rounded-xs justify-center"
+      >
+        <span>{{ T "back_home" }}</span>
+      </a>
+    </div>
+  </main>
+{{ end }}

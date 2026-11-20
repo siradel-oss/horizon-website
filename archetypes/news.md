@@ -4,5 +4,5 @@ title = '{{ replace (replaceRE "^[\\d-]+(.*)" "$1" .File.ContentBaseName) "-" " 
 slug = '{{ replaceRE "^[\\d-]+(.*)" "$1" .File.ContentBaseName }}'
 categories = []
 thumbnail = 'image.png'
-excerpt = ""
+description = ''
 +++

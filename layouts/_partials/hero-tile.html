@@ -11,6 +11,7 @@
   <img
     src="{{ .image }}"
     alt=""
+    {{ with .fetchpriority }}fetchpriority="{{ . }}"{{ end }}
     class="
       w-full h-full object-cover
       transition-[scale,opacity] duration-500 ease-in-out

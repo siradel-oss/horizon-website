@@ -2,6 +2,10 @@
 <html lang="{{ .Site.Language.Lang }}">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ partial "description.html" . }}" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link
       href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap"
       rel="stylesheet"
@@ -13,10 +17,19 @@
       href="{{ (resources.Get "favicon.svg").RelPermalink }}"
     />
     <title>
-      {{ if .Page.Title }}
-        {{ .Page.Title }} &centerdot;
-      {{ end }}{{ .Page.Params.title_suffix }}
+      {{- if .IsHome -}}
+        {{ .Title }}
+      {{- else -}}
+        {{- $title := cond (eq .Kind "404") (T "not_found_title") .Title -}}
+        {{- with $title }}{{ printf "%s · " . }}{{ end -}}
+        {{ .Params.title_suffix | default site.Title -}}
+      {{- end -}}
     </title>
+    {{ if eq .Kind "404" }}
+      <meta name="robots" content="noindex" />
+    {{ else }}
+      {{ partial "seo.html" . }}
+    {{ end }}
     {{ with (templates.Defer (dict "key" "global")) }}
       {{ partial "css.html" . }}
     {{ end }}

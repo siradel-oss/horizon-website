@@ -1,0 +1,69 @@
+{{ $desc := partial "description.html" . }}
+{{ $ogLocales := dict "en" "en_US" "fr" "fr_FR" }}
+
+{{ $source := false }}
+{{ with .Params.og_image }}
+  {{ $source = or ($.Resources.Get .) (site.Home.Resources.Get .) }}
+{{ end }}
+{{ if not $source }}
+  {{ with .Params.thumbnail }}{{ $source = $.Resources.Get . }}{{ end }}
+{{ end }}
+{{ $staticImage := "" }}
+{{ if and (not $source) (eq .Section "gallery") (eq .Kind "page") }}
+  {{ with index hugo.Data.gallery.galleryDemos .Slug }}
+    {{ with .thumbnailFile }}
+      {{ $staticImage = printf "gallery/assets/thumbnails/%s" . | absURL }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if and (not $source) (not $staticImage) }}
+  {{ $source = site.Home.Resources.Get "images/dtm.webp" }}
+{{ end }}
+
+
+<link rel="canonical" href="{{ .Permalink }}" />
+{{ if gt (len .AllTranslations) 1 }}
+  {{ range .AllTranslations }}
+    <link
+      rel="alternate"
+      hreflang="{{ .Language.Lang }}"
+      href="{{ .Permalink }}"
+    />
+    {{ if eq .Language.Weight 1 }}
+      <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+
+<meta
+  property="og:type"
+  content="{{ cond (and (eq .Section "news") (eq .Kind "page")) "article" "website" }}"
+/>
+<meta property="og:site_name" content="{{ site.Title }}" />
+<meta property="og:title" content="{{ .Title | default site.Title }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="{{ index $ogLocales .Language.Lang }}" />
+{{ range .Translations }}
+  <meta
+    property="og:locale:alternate"
+    content="{{ index $ogLocales .Language.Lang }}"
+  />
+{{ end }}
+{{ if and (eq .Section "news") (eq .Kind "page") }}
+  <meta
+    property="article:published_time"
+    content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}"
+  />
+{{ end }}
+{{ with $source }}
+  {{ $ogImage := .Fill "1200x630 Center jpg q82" }}
+  <meta property="og:image" content="{{ $ogImage.Permalink }}" />
+  <meta property="og:image:width" content="{{ $ogImage.Width }}" />
+  <meta property="og:image:height" content="{{ $ogImage.Height }}" />
+{{ else }}
+  <meta property="og:image" content="{{ $staticImage }}" />
+{{ end }}
+<meta property="og:image:alt" content="{{ .Title | default site.Title }}" />
+<meta name="twitter:card" content="summary_large_image" />

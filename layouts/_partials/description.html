@@ -1,0 +1,15 @@
+{{ $desc := .Description }}
+{{ if and (not $desc) (eq .Section "gallery") (eq .Kind "page") }}
+  {{ $desc = T "gallery_demo_description" (dict "Title" .Title) }}
+{{ end }}
+{{ if and (not $desc) .Content }}
+  {{ $desc = .Content
+    | replaceRE `(?s)<h[1-6][^>]*>.*?</h[1-6]>` " "
+    | replaceRE `(?s)<(pre|nav|figure|table)[^>]*>.*?</(pre|nav|figure|table)>` " "
+    | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace
+  }}
+  {{ if gt (strings.RuneCount $desc) 160 }}
+    {{ $desc = $desc | truncate 157 "…" }}
+  {{ end }}
+{{ end }}
+{{ return (or $desc site.Params.description) }}

@@ -1,10 +1,10 @@
 +++
 date = '2026-09-17'
 title = 'Version 26.0.0'
+description = 'Horizon 26.0.0, the first open-source release of the geographic 3D engine: glTF animations, more readable symbols in vector tiles, terrain elevation queries and a cleaned-up API.'
 slug = 'version-26-0-0'
 categories = ["release"]
 thumbnail = 'thumbnail.webp'
-excerpt = "Our first open-source release is here! Version 26.0.0 is now available, bringing 3D models animations, and an improved API."
 +++
 
 Version 26.0.0 of Horizon is our first open-source release.

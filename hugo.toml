@@ -1,4 +1,7 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://horizon.oss.siradel.com/'
+enableRobotsTXT = true
+# Category pages (/news/<category>/) are rendered, not the list of categories.
+disableKinds = ['taxonomy']
 locale = 'en-us'
 title = 'Horizon'
 enableMissingTranslationPlaceholders = true
@@ -46,10 +49,16 @@ disablePathToLower = true
     [languages.en]
         label = "EN"
         locale = "en-us"
+        weight = 1
+        [languages.en.params]
+            description = "Open-source 3D engine for geospatial data: terrain, imagery, vectors, glTF and 3D Tiles, in the browser (WebAssembly, WebGL 2) or natively on Windows and Linux."
 
     [languages.fr]
         label = "FR"
         locale = "fr-fr"
+        weight = 2
+        [languages.fr.params]
+            description = "Moteur 3D open source pour les données géospatiales : terrain, imagerie, vecteurs, glTF et 3D Tiles, dans le navigateur (WebAssembly, WebGL 2) ou en natif sous Windows et Linux."
 
 [markup]
   [markup.tableOfContents]
