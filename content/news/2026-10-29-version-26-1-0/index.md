@@ -7,6 +7,11 @@ categories = ["release"]
 thumbnail = 'thumbnail.webp'
 +++
 
+*Update 23 November 2026:* We released hotfix 26.1.1, which solves an issue with
+the compilation mode of Linux native artifacts.
+
+---
+
 Version 26.1.0 of Horizon is now available, improving handling of vector
 multi-geometries, and adding new configuration options for the sun's position.
 
@@ -25,6 +30,6 @@ multi-geometries, and adding new configuration options for the sun's position.
   - Its position can also be set using precise calendar dates and times.
   - [See the gallery demo](/gallery/sunPosition.html).
 
-> [Read the full changelog](/doc/changelog.html#version-2610---2026-10-29)
+> [Read the full changelog](/doc/changelog.html#version-2611---2026-11-23)
 >
-> [See the release on GitHub](https://github.com/siradel-oss/horizon/releases/tag/v26.1.0)
+> [See the release on GitHub](https://github.com/siradel-oss/horizon/releases/tag/v26.1.1)
